@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Tally Rally
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > For when you can't make a dang decision.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > This product will allow a user to create a poll and receive a link, which others can use to vote on the answers. An account holder can see current polls as well as create new ones.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > When you or your group is having a hard time coming to a decision
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > You can let other people choose for you!
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "This is the greatest thing ever created."
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Create a new poll, share your link, and sit back while everyone else makes your decision for you!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I have a phobia of making big life decisions and Tally Rally helped me choose to major in 18th Century Puppetry!" -some guy
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Get polling!
