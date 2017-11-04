@@ -24,11 +24,14 @@ const Poll = sequelize.define('poll', {
 });
 
 const Choice = sequelize.define('choice', {
+  text: Sequelize.STRING,
   votes: Sequelize.INTEGER
 });
 
 Choice.belongsTo(Poll);
 Poll.belongsTo(User);
+User.hasMany(Poll);
+Poll.hasMany(Choice);
 
 sequelize.sync();
 
