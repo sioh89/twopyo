@@ -1,5 +1,6 @@
 import React from 'react';
 import ResultsEntry from './resultsEntry.jsx';
+import { Button } from 'react-bootstrap';
 
 let Results = function(props) {
   return (
@@ -9,6 +10,7 @@ let Results = function(props) {
       {props.resultsData.choices.map((choice, index) => 
         <ResultsEntry choice={choice} key={index}/>
       )}
+      <Button bsStyle="success" bsSize="large" onClick={props.goToIndex} block>Go home!</Button>
     </div>
   );
 }

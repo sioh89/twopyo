@@ -101,7 +101,7 @@ class App extends React.Component {
         <div>
           <h1 id="title-card">Tally</h1>
           <h3>Results</h3>
-          <Results resultsData={this.state.currentResultsData}/>
+          <Results goToIndex={this.goToIndex} resultsData={this.state.currentResultsData}/>
         </div>
       );
 

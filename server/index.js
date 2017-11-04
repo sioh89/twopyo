@@ -100,11 +100,11 @@ app.get('/results/*', (req, res) => {
 
 app.post('/castVote', (req, res) => {
   console.log('&&&pollID', req.body.pollId);
-  console.log('*&(*&text', req.body.text);
+  console.log('*&(*&text', req.body.choiceNumber);
   sequelize.models.choice.increment('votes', {
     where: {
       pollId: req.body.pollId,
-      text: req.body.choiceText
+      id: req.body.choiceNumber
     }
   }).then(() => {
     console.log('********INCREMEMNTED');
@@ -132,12 +132,12 @@ app.get('/*', (req, res) => {
         let choiceObject = choicesArray[i].dataValues;
         returnObj.choices.push({
           text: choiceObject.text,
-          votes: choiceObject.votes
+          votes: choiceObject.votes,
+          id: choiceObject.id
         });
       }
       
       res.json(returnObj);
-    } else {
     }
   });
 })

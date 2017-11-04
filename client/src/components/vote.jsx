@@ -21,6 +21,7 @@ class Vote extends React.Component {
     this.castVote = this.castVote.bind(this);
   }
 
+
   currentTextChange(e) {
     this.setState({
       currentTextValue: e.target.value
@@ -44,8 +45,9 @@ class Vote extends React.Component {
   }
 
   selectRadio(e) {
+    let choiceNumber = document.querySelector('input[name = "choices"]:checked').value;    
     this.setState({
-      currentSelection: 1
+      currentSelection: choiceNumber
     });
   }
 
@@ -60,7 +62,7 @@ class Vote extends React.Component {
       type: 'POST',
       data: {
         pollId: this.state.currentPoll.pollId,
-        choiceText: choiceTextValue
+        choiceNumber: choiceTextValue
       },
       success: (data) => {
         console.log('success!', data);
@@ -103,7 +105,7 @@ class Vote extends React.Component {
         <h4>{this.state.currentPoll.pollDesc}</h4>
         <form>
           {this.state.currentPoll.choices.map((choice, index) => 
-            <Radio name="choices" onClick={this.selectRadio} key={index} index={index} value={choice.text}>{choice.text}</Radio>
+            <Radio name="choices" onClick={this.selectRadio} key={index} index={index} value={choice.id}>{choice.text}</Radio>
           )}
           <Button
             type="submit"
