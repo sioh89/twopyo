@@ -16,23 +16,22 @@ class App extends React.Component {
   }
 
   goToCreatePage() {
-    console.log('***should change page to create!');
     this.setState({
       currentPage: '/create'
     });
-    // $.ajax({
-    //   url: 'http://localhost:3000/polls',
-    //   type: 'POST',
-    //   data: {
-    //     owner: 'testOwner',
-    //     pollTitle: 'Test poll',
-    //     pollDesc: 'This is a test post',
-    //     choices: ['Choice A', 'Choice B', 'Choice C', 'Choice D']
-    //   },
-    //   success: (data) => {
-    //     console.log('success!');
-    //   }
-    // })
+    $.ajax({
+      url: 'http://localhost:3000/polls',
+      type: 'POST',
+      data: {
+        owner: 'testOwner',
+        pollTitle: 'Test poll',
+        pollDesc: 'This is a test post',
+        choices: ['Choice A', 'Choice B', 'Choice C', 'Choice D']
+      },
+      success: (data) => {
+        console.log('success!', data);
+      }
+    })
   }
 
   componentDidMount() {
@@ -41,6 +40,7 @@ class App extends React.Component {
       url: 'http://localhost:3000/polls',
       type: 'GET',
       success: (data) => {
+        console.log('****(*&', data);
         this.setState({
           polls : data
         });

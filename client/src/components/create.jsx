@@ -4,6 +4,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup.js';
 import FormControl from 'react-bootstrap/lib/FormControl.js';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock.js';
 import ChoicesList from './choicesList.jsx';
+import Button from 'react-bootstrap/lib/Button.js';
 
 class Create extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Create extends React.Component {
     this.descChange = this.descChange.bind(this);
     this.choiceValueChange = this.choiceValueChange.bind(this);
     this.choiceAddLength = this.choiceAddLength.bind(this);
+    this.createPoll = this.createPoll.bind(this);
   }
 
   titleChange(e) {
@@ -45,6 +47,10 @@ class Create extends React.Component {
     this.setState({
       choicesValues: choicesValues.concat(['', ''])
     });
+  }
+
+  createPoll() {
+    //POST REQUEST TO DB PLS
   }
 
   render() {
@@ -80,6 +86,9 @@ class Create extends React.Component {
               />
 
           </FormGroup>
+          <Button type="button" onClick={this.createPoll}>
+            Create
+          </Button>
         </form>
       </div>
     );

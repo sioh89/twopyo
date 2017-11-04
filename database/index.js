@@ -20,11 +20,12 @@ const User = sequelize.define('user', {
 
 const Poll = sequelize.define('poll', {
   title: Sequelize.STRING(50),
-  description: Sequelize.STRING(160)
+  description: Sequelize.STRING(160),
+  link: Sequelize.STRING(5)
 });
 
 const Choice = sequelize.define('choice', {
-  text: Sequelize.STRING,
+  text: Sequelize.STRING(160),
   votes: Sequelize.INTEGER
 });
 
