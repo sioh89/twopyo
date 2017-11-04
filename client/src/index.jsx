@@ -37,19 +37,6 @@ class App extends React.Component {
     this.setState({
       currentPage: '/create'
     });
-    // $.ajax({
-    //   url: 'http://localhost:3000/polls',
-    //   type: 'POST',
-    //   data: {
-    //     owner: 'testOwner',
-    //     pollTitle: 'Test poll',
-    //     pollDesc: 'This is a test post',
-    //     choices: ['Choice A', 'Choice B', 'Choice C', 'Choice D']
-    //   },
-    //   success: (data) => {
-    //     console.log('success!', data);
-    //   }
-    // })
   }
 
   componentDidMount() {
@@ -82,6 +69,13 @@ class App extends React.Component {
         <div>
           <h1 id="title-card">Index page!</h1>
           <Create goToIndex={this.goToIndex}/>
+        </div>
+      );
+
+    if (currentPage === '/polling')
+      return (
+        <div>
+          
         </div>
       );
   }
