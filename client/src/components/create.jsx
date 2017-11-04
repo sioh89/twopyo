@@ -5,6 +5,7 @@ import FormControl from 'react-bootstrap/lib/FormControl.js';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock.js';
 import ChoicesList from './choicesList.jsx';
 import Button from 'react-bootstrap/lib/Button.js';
+import $ from 'jquery';
 
 class Create extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class Create extends React.Component {
       numberOfChoices: 4,
       titleValue: '',
       descValue: '',
-      choicesValues: ['', '', '', '']
+      choicesValues: ['', '', '', ''],
+      choicesBoolean: false,
+      titleBoolean: false
     };
     this.titleChange = this.titleChange.bind(this);
     this.descChange = this.descChange.bind(this);
@@ -23,8 +26,10 @@ class Create extends React.Component {
   }
 
   titleChange(e) {
+    let temp = /\S/.test(this.state.titleValue)
     this.setState({
-      titleValue: e.target.value
+      titleValue: e.target.value,
+      titleBoolean: temp
     });
   }
 
@@ -38,8 +43,16 @@ class Create extends React.Component {
     let tempArray = this.state.choicesValues.slice();
     let tempIndex = parseInt(e.target.className.split(' ')[0]);
     tempArray[tempIndex] = e.target.value;
+    let atLeastOneChoice = true;
+    for (let i = 0; i < tempArray.length; i++) {
+      let temp = tempArray[i];
+      if (!/\S/.test(temp)) {
+        atLeastOneChoice = false;
+      }
+    }
     this.setState({
-      choicesValues: tempArray
+      choicesValues: tempArray,
+      choicesBoolean: atLeastOneChoice
     })
   }
 
@@ -49,15 +62,30 @@ class Create extends React.Component {
     });
   }
 
-  createPoll() {
-    //POST REQUEST TO DB PLS
+  createPoll(e) {
+    e.preventDefault();
+    let postObject = {};
+    postObject.owner = 'admin';
+    postObject.pollTitle = this.state.titleValue;
+    postObject.pollDesc = this.state.descValue;
+    postObject.choices = this.state.choicesValues;
+
+    $.ajax({
+      url: 'http://localhost:3000/polls',
+      type: 'POST',
+      data: postObject,
+      success: (data) => {
+        console.log('success!', data);
+        this.props.goToIndex();
+      }
+    });
   }
 
   render() {
     return (
       <div>
         <form>
-          <FormGroup controlId="createNewPoll">
+          <FormGroup controlId="createNewPoll" onSubmit={this.createPoll}>
 
             <FormControl
               type="text"
@@ -86,7 +114,7 @@ class Create extends React.Component {
               />
 
           </FormGroup>
-          <Button type="button" onClick={this.createPoll}>
+          <Button type="submit" onClick={this.createPoll} disabled={!this.state.titleBoolean || !this.state.choicesBoolean}>
             Create
           </Button>
         </form>

@@ -14,7 +14,7 @@ class ChoiceEntry extends React.Component {
         <FormControl
         type="text"
         value={this.props.choicesValues[this.props.index]}
-        placeholder="More information (optional)"
+        placeholder="Choices (required)"
         onChange={this.props.choiceValueChange}
         maxLength="160"
         className={JSON.stringify(this.props.index)}

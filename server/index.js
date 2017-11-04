@@ -21,6 +21,7 @@ app.get('/polls', (req, res) => {
       tempPollData.owner = info.user.dataValues.name;
       tempPollData.pollTitle = info.title;
       tempPollData.pollDesc = info.description;
+      tempPollData.pollId = info.id;
       tempPollData.choices = [];
       
       for (let j = 0; j < info.choices.length; j++) {
@@ -34,31 +35,35 @@ app.get('/polls', (req, res) => {
       pollData.push(tempPollData);
     }
     
-    res.json(pollData);
+    res.json(pollData.reverse());
   });
 });
 
 app.post('/polls', (req, res) => {
+
+  let link;
+
   sequelize.models.user.findOrCreate({
     where: {
       name: req.body.owner
     }
   }).then((user) => {
-      sequelize.models.poll.create({
-        title: req.body.pollTitle,
-        description: req.body.pollDesc,
-        userId: user[0].dataValues.id
-      }).then((poll) => {
-        for (let i = 0; i < req.body.choices.length; i++) {
-          sequelize.models.choice.create({
-            text: req.body.choices[i],
-            votes: 0,
-            pollId: poll.dataValues.id
-          });
-        }
-      }).done(() => {
-        res.send('complete!');
-      });
+    sequelize.models.poll.create({
+      title: req.body.pollTitle,
+      description: req.body.pollDesc,
+      userId: user[0].dataValues.id
+    }).then((poll) => {
+      link = poll.dataValues.id;
+      for (let i = 0; i < req.body.choices.length; i++) {
+        sequelize.models.choice.create({
+          text: req.body.choices[i],
+          votes: 0,
+          pollId: poll.dataValues.id
+        });
+      }
+    }).done(() => {
+      res.json(link);
+    });
   });
 });
 
