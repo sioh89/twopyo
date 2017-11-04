@@ -6,7 +6,7 @@ let PollList = function(props) {
   return (
     <div>
       <h4>Open polls: {props.polls.length}</h4>
-      {props.polls.map(poll => <PollEntry poll={poll} goToResults={props.goToResults}/>)}
+      {props.polls.map((poll, index) => <PollEntry poll={poll} key={index} goToResults={props.goToResults}/>)}
     </div>
   );
 }

@@ -1,7 +1,10 @@
 const express = require('express');
 const sequelize = require('../database/index.js');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
+const reactDOM = require('react-dom');
+const React = require('react');
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -75,7 +78,6 @@ app.get('/results/*', (req, res) => {
     },
     include: [{all: true}]
   }).then(poll => {
-    console.log('***!#', poll.dataValues);
     let returnObj = {};
     returnObj.pollTitle = poll.dataValues.title;
     returnObj.pollDesc = poll.dataValues.description;
@@ -92,10 +94,39 @@ app.get('/results/*', (req, res) => {
       });
     }
     
-    console.log(returnObj);
     res.json(returnObj);
   });
 });
+
+app.get('/*', (req, res) => {
+  let pollId = req.url.split('/')[1];
+
+  sequelize.models.poll.find({
+    where: {id: pollId},
+    include: [{all:true}]
+  }).then(poll => {
+    if (poll) {
+      let returnObj = {};
+      returnObj.pollTitle = poll.dataValues.title;
+      returnObj.pollDesc = poll.dataValues.description;
+      returnObj.pollId = poll.dataValues.id;
+      returnObj.owner = poll.dataValues.user.dataValues.name;
+      returnObj.choices = [];
+
+      let choicesArray = poll.dataValues.choices;
+      for (let i = 0; i < choicesArray.length; i++) {
+        let choiceObject = choicesArray[i].dataValues;
+        returnObj.choices.push({
+          text: choiceObject.text,
+          votes: choiceObject.votes
+        });
+      }
+      
+      res.json(returnObj);
+    } else {
+    }
+  });
+})
 
 const port = 3000;
 app.listen(port, () => console.log(`listening to port ${port}`));
