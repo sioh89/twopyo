@@ -52,18 +52,26 @@ class Vote extends React.Component {
   castVote(e) {
     e.preventDefault();
 
-    let select = document.querySelector('input[name = "choices"]:checked').value;
-    console.log('***', select);
-    let tempUrl = 'http://localhost:3000/castVote/' + JSON.stringify(this.state.currentPoll.pollId);
+    let choiceTextValue = document.querySelector('input[name = "choices"]:checked').value;
+    console.log('***', choiceTextValue);
+    let tempUrl = 'http://localhost:3000/castVote';
     $.ajax({
       url: tempUrl,
       type: 'POST',
       data: {
-        pollId: this.state.currentPoll,
-        choiceText: select
+        pollId: this.state.currentPoll.pollId,
+        choiceText: choiceTextValue
       },
       success: (data) => {
         console.log('success!', data);
+        let fetchUrl = 'http://localhost:3000/results/' + this.state.currentPoll.pollId;
+        $.ajax({
+          url: fetchUrl,
+          type: 'GET',
+          success: (data) => {
+            this.props.goToResults(data);
+          }
+        })
       }
     })
   }

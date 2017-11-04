@@ -98,6 +98,20 @@ app.get('/results/*', (req, res) => {
   });
 });
 
+app.post('/castVote', (req, res) => {
+  console.log('&&&pollID', req.body.pollId);
+  console.log('*&(*&text', req.body.text);
+  sequelize.models.choice.increment('votes', {
+    where: {
+      pollId: req.body.pollId,
+      text: req.body.choiceText
+    }
+  }).then(() => {
+    console.log('********INCREMEMNTED');
+    res.send('Vote counted!');
+  });
+})
+
 app.get('/*', (req, res) => {
   let pollId = req.url.split('/')[1];
 

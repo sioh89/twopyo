@@ -110,7 +110,7 @@ class App extends React.Component {
         <div>
           <h1 id="title-card">Tally</h1>
           <h3>Vote!</h3>
-          <Vote/>
+          <Vote goToResults={this.goToResults}/>
         </div>
       );
   }
