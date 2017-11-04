@@ -10,10 +10,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       polls: [],
-      currentPage: '/index'
+      currentPage: '/index',
+      currentResultsData: {}
     };
     this.goToCreatePage = this.goToCreatePage.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
+    this.goToResults = this.goToResults.bind(this);
   }
 
   goToIndex() {
@@ -39,6 +41,14 @@ class App extends React.Component {
     });
   }
 
+  goToResults(data) {
+    console.log('!!!!!!!!!!',data)
+    // this.setState({
+    //   currentPage: '/results',
+    //   currentResultsData: data
+    // });
+  }
+
   componentDidMount() {
     console.log('mounted! c:');
     $.ajax({
@@ -60,7 +70,7 @@ class App extends React.Component {
         <div>
           <h1 id="title-card">Tally Rally</h1>
           <Button bsStyle="success" bsSize="large" onClick={this.goToCreatePage} block>Create New Poll</Button>
-          <PollList polls={this.state.polls} />
+          <PollList polls={this.state.polls} goToResults={this.goToResults}/>
         </div>
       );
 

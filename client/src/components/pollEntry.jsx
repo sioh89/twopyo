@@ -14,7 +14,7 @@ class PollEntry extends React.Component {
       url: fetchUrl,
       type: 'GET',
       success: (data) => {
-        console.log('****(*&', data);
+        this.props.goToResults(data);
       }
     })
   }
