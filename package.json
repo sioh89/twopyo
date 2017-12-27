@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack -w --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
@@ -32,6 +34,7 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
     "sequelize": "^4.28.6"
   }
 }
