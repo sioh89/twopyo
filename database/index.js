@@ -2,17 +2,18 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('tallyrally', 'root', '', {
   host: 'localhost',
-  dialect: 'mysql'
+  dialect: 'mysql',
 });
 
 sequelize
-.authenticate()
-.then(() => {
-  console.log('Connection successfully established');
-})
-.catch(error => {
-  console.error('Error occurred during connection', error);
-});
+  .authenticate()
+  .then(() => {
+    if (error) throw error;
+    console.log('Connection successfully established');
+  })
+  .catch(error => {
+    console.error('Error occurred during connection', error);
+  });
 
 const User = sequelize.define('user', {
   name: Sequelize.STRING(20)

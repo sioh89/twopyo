@@ -32,6 +32,6 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
-    "sequelize": "^4.22.1"
+    "sequelize": "^4.28.6"
   }
 }
