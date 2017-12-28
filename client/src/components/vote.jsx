@@ -1,116 +1,63 @@
 import React from 'react';
-import Form from 'react-bootstrap/lib/Form.js';
-import FormGroup from 'react-bootstrap/lib/FormGroup.js';
-import FormControl from 'react-bootstrap/lib/FormControl.js';
-import Button from 'react-bootstrap/lib/Button.js';
-import Radio from 'react-bootstrap/lib/Radio.js';
-import $ from 'jquery';
+import axios from 'axios';
+import {
+  FormGroup,
+  Radio,
+  Button,
+  Jumbotron,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
 
 
 class Vote extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPoll: '',
-      currentTextValue: '',
-      currentSelection: -1
+      pollId: this.props.match.params.id,
+      poll: {},
+      selected: -1,
     };
-    this.currentTextChange = this.currentTextChange.bind(this);
-    this.getPoll = this.getPoll.bind(this);
-    this.selectRadio = this.selectRadio.bind(this);
-    this.castVote = this.castVote.bind(this);
   }
 
-
-  currentTextChange(e) {
+  selectItem(e) {
+    e.preventDefault();
+    console.log('selected', e.target.value);
     this.setState({
-      currentTextValue: e.target.value
+      selected: e.target.value,
     })
   }
 
-  getPoll(e) {
-    e.preventDefault();
-    let tempUrl = 'http://localhost:3000/' + this.state.currentTextValue;
-    $.ajax({
-      url: tempUrl,
-      type: 'GET',
-      success: (data) => {
-        console.log('success!', data);
+  componentDidMount() {
+    axios.post('/pollById', {pollId: this.state.pollId})
+      .then(res => {
         this.setState({
-          currentPoll: data
-        });
-      }
-    })
-
-  }
-
-  selectRadio(e) {
-    let choiceNumber = document.querySelector('input[name = "choices"]:checked').value;    
-    this.setState({
-      currentSelection: choiceNumber
-    });
-  }
-
-  castVote(e) {
-    e.preventDefault();
-
-    let choiceTextValue = document.querySelector('input[name = "choices"]:checked').value;
-    console.log('***', choiceTextValue);
-    let tempUrl = 'http://localhost:3000/castVote';
-    $.ajax({
-      url: tempUrl,
-      type: 'POST',
-      data: {
-        pollId: this.state.currentPoll.pollId,
-        choiceNumber: choiceTextValue
-      },
-      success: (data) => {
-        console.log('success!', data);
-        let fetchUrl = 'http://localhost:3000/results/' + this.state.currentPoll.pollId;
-        $.ajax({
-          url: fetchUrl,
-          type: 'GET',
-          success: (data) => {
-            this.props.goToResults(data);
-          }
+          poll: res.data,
         })
-      }
-    })
+      })
   }
 
   render() {
-    if (this.state.currentPoll === '')
-      return (
-        <div>
-          <form>
-            <FormGroup controlId="getPoll" onSubmit={this.getPoll}>
-              <FormControl
-                type="text"
-                value={this.state.currentTextValue}
-                placeholder="Poll number"
-                onChange={this.currentTextChange}
-                bsSize="large"
-                maxLength="5"
-              ></FormControl>
-            </FormGroup>
-            <Button type="submit" onClick={this.getPoll} disabled={!this.state.currentTextValue}>
-            Get poll</Button>
-          </form>
-        </div>
-      );
-  
     return (
       <div>
-        <h3>{this.state.currentPoll.pollTitle}</h3>
-        <h4>{this.state.currentPoll.pollDesc}</h4>
+        {JSON.stringify(this.state.poll)}
         <form>
-          {this.state.currentPoll.choices.map((choice, index) => 
-            <Radio name="choices" onClick={this.selectRadio} key={index} index={index} value={choice.id}>{choice.text}</Radio>
-          )}
-          <Button
-            type="submit"
-            onClick={this.castVote}
-            disabled={this.state.currentSelection===-1}>Cast my vote!</Button>
+          <Jumbotron>
+            <h1 className="poll-title">{this.state.poll.pollTitle}</h1>
+            <p className="poll-description">{this.state.poll.pollDesc}</p>
+            <ListGroup className="poll-choices"  onClick={this.selectItem.bind(this)}>
+              {this.state.poll.choices && this.state.poll.choices.map((choice) =>
+                (
+                  <li key={choice.id} value={choice.id} className="list-group-item poll-choice-item">
+                    {choice.text}
+                    <div>
+                      <img src="left.svg" className="selected-icon" style={{visibility: this.state.selected === this.value ? 'visible' : 'hidden' }}/>
+                    </div>
+                  </li>
+                )
+              )}
+            </ListGroup>
+          </Jumbotron>
         </form>
       </div>
     );

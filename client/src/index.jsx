@@ -91,6 +91,7 @@ class App extends React.Component {
               <Route exact path="/" component={Home}/>
               <Route path="/create" component={Create}/>
               <Route path="/results/:id" component={Results}/>
+              <Route path="/:id" component={Vote}/>
             </Switch>
           </div>
         </Router>

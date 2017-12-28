@@ -49,9 +49,9 @@ class Results extends React.Component {
           <Panel defaultExpanded header={this.state.pollResults.pollTitle}>
             {this.state.pollResults.pollDesc}
             <ListGroup fill>
-              {this.state.pollResults.choices.map(choice => 
+              {this.state.pollResults.choices.map((choice, index) => 
                 (
-                  <ListGroupItem>
+                  <ListGroupItem key={index}>
                     <span>{choice.text}</span> <span>{choice.votes}</span>
                   </ListGroupItem>
                 )

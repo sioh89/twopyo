@@ -31,6 +31,7 @@ module.exports = {
         res.json(pollData.reverse());
       });
     },
+
     post: (req, res, next) => {
       let link;
       
@@ -110,9 +111,9 @@ module.exports = {
     }
   },
 
-  pollLink: {
-    get: (req, res, next) => {
-      let pollId = req.url.split('/')[1];
+  pollById: {
+    post: (req, res, next) => {
+      let pollId = req.body.pollId;
       
         sequelize.models.poll.find({
           where: {id: pollId},
@@ -131,7 +132,6 @@ module.exports = {
               let choiceObject = choicesArray[i].dataValues;
               returnObj.choices.push({
                 text: choiceObject.text,
-                votes: choiceObject.votes,
                 id: choiceObject.id
               });
             }
