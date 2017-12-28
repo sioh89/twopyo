@@ -90,6 +90,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/create" component={Create}/>
+              <Route path="/results/:id" component={Results}/>
             </Switch>
           </div>
         </Router>

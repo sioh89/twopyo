@@ -60,8 +60,9 @@ module.exports = {
   },
 
   results: {
-    get: (req, res, next) => {
-      let pollId = req.url.split('/')[2]
+
+    post: (req, res, next) => {
+      let pollId = req.body.pollId;
       sequelize.models.poll.find({
         where : {
           id: pollId

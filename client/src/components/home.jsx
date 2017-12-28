@@ -23,7 +23,9 @@ class Home extends React.Component {
         this.setState({
           polls: response.data,
         })
+        console.log(this.state.polls);
       });
+
   }
 
   render() {

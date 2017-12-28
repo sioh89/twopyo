@@ -1,18 +1,49 @@
 import React from 'react';
 import ResultsEntry from './resultsEntry.jsx';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
-let Results = function(props) {
-  return (
-    <div>
-      <h4>{props.resultsData.pollTitle}</h4>
-      <p>{props.resultsData.pollDesc}</p>
-      {props.resultsData.choices.map((choice, index) => 
-        <ResultsEntry choice={choice} key={index}/>
-      )}
-      <Button bsStyle="success" bsSize="large" onClick={props.goToIndex} block>Go home!</Button>
-    </div>
-  );
+class Results extends React.Component {
+
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      pollId: props.match.params.id,
+      pollResults: {},
+
+    }
+  }
+
+  componentDidMount() {
+    axios.post('/results', { pollId: this.state.pollId })
+      .then(res => {
+        console.log(res);
+        this.setState({
+          pollResults: res.data,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          pollResults: 'ERROR'
+        });
+      })
+  }
+
+  render() {
+    return (this.state.pollResults === 'ERROR') ?
+      (
+        <div>
+          COULD NOT FIND POLL
+        </div>
+      )
+    :
+      (
+        <div>
+          {JSON.stringify(this.state.pollResults)}
+        </div>
+      )
+  }
 }
 
 export default Results;
