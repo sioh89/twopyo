@@ -84,6 +84,10 @@ module.exports = {
             votes: choiceObject.votes
           });
         }
+
+        returnObj.choices.sort((a, b) => {
+          return b.votes - a.votes;
+        });
         
         res.json(returnObj);
       });

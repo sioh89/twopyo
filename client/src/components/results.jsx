@@ -1,6 +1,11 @@
 import React from 'react';
 import ResultsEntry from './resultsEntry.jsx';
-import { Button } from 'react-bootstrap';
+import {
+  Button,
+  Panel,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
 import axios from 'axios';
 
 class Results extends React.Component {
@@ -31,7 +36,7 @@ class Results extends React.Component {
   }
 
   render() {
-    return (this.state.pollResults === 'ERROR') ?
+    return (this.state.pollResults === 'ERROR' || !this.state.pollResults.pollId) ?
       (
         <div>
           COULD NOT FIND POLL
@@ -41,6 +46,18 @@ class Results extends React.Component {
       (
         <div>
           {JSON.stringify(this.state.pollResults)}
+          <Panel defaultExpanded header={this.state.pollResults.pollTitle}>
+            {this.state.pollResults.pollDesc}
+            <ListGroup fill>
+              {this.state.pollResults.choices.map(choice => 
+                (
+                  <ListGroupItem>
+                    <span>{choice.text}</span> <span>{choice.votes}</span>
+                  </ListGroupItem>
+                )
+              )}
+            </ListGroup>
+          </Panel>
         </div>
       )
   }
