@@ -13,6 +13,8 @@ import Create from './components/create.jsx';
 import Results from './components/results.jsx';
 import Vote from './components/vote.jsx';
 import Home from './components/home.jsx';
+import './styles.css';
+
 
 class App extends React.Component {
   constructor(props) {

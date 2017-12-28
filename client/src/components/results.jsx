@@ -46,18 +46,18 @@ class Results extends React.Component {
       (
         <div>
           {JSON.stringify(this.state.pollResults)}
-          <Panel defaultExpanded header={this.state.pollResults.pollTitle}>
+          <div className="card" defaultExpanded header={this.state.pollResults.pollTitle}>
             {this.state.pollResults.pollDesc}
-            <ListGroup fill>
+            <ul className="list-group" fill>
               {this.state.pollResults.choices.map((choice, index) => 
                 (
-                  <ListGroupItem key={index}>
+                  <li className="list-group-item" key={index}>
                     <span>{choice.text}</span> <span>{choice.votes}</span>
-                  </ListGroupItem>
+                  </li>
                 )
               )}
-            </ListGroup>
-          </Panel>
+            </ul>
+          </div>
         </div>
       )
   }

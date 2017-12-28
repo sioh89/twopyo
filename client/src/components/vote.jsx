@@ -9,7 +9,6 @@ import {
   ListGroupItem,
 } from 'react-bootstrap';
 
-
 class Vote extends React.Component {
   constructor(props) {
     super(props);
@@ -42,10 +41,10 @@ class Vote extends React.Component {
       <div>
         {JSON.stringify(this.state.poll)}
         <form>
-          <Jumbotron>
+          <div className="jumbotron">
             <h1 className="poll-title">{this.state.poll.pollTitle}</h1>
             <p className="poll-description">{this.state.poll.pollDesc}</p>
-            <ListGroup className="poll-choices"  onClick={this.selectItem.bind(this)}>
+            <ul className="list-group poll-choices"  onClick={this.selectItem.bind(this)}>
               {this.state.poll.choices && this.state.poll.choices.map((choice) =>
                 (
                   <li key={choice.id} value={choice.id} className="list-group-item poll-choice-item">
@@ -56,8 +55,8 @@ class Vote extends React.Component {
                   </li>
                 )
               )}
-            </ListGroup>
-          </Jumbotron>
+            </ul>
+          </div>
         </form>
       </div>
     );
