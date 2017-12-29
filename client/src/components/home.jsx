@@ -31,11 +31,13 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-component">
-        <div className="btn to-create">
-          <Link to="/create">Create a poll</Link>
-        </div>
-        <div className="list">
-          <PollsList polls={this.state.polls} />
+        <div className="card main-card">
+          <div className="btn to-create">
+            <Link to="/create">Create a poll</Link>
+          </div>
+          <div className="list">
+            <PollsList polls={this.state.polls} />
+          </div>
         </div>
       </div>
     );

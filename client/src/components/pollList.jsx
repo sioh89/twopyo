@@ -11,18 +11,17 @@ let PollList = function(props) {
   console.log('from polllist', props.polls[0]);
   return (
     <div>
-      <h4>Open polls: {props.polls.length}</h4>
-      <ListGroup>
+      <h4 class="">Open polls: {props.polls.length}</h4>
+      <div className="list-group">
         {props.polls.map((poll, index) => 
           (
-            <ListGroupItem key={index}>
-              <Link to={{pathname: `/results/${poll.pollId}`}}>
-                {poll.pollTitle} / {poll.pollId}
-              </Link>
-            </ListGroupItem>
+            <Link className="list-group-item list-group-item-action poll-item" key={index} to={{pathname: `/results/${poll.pollId}`}}>
+              <div className="poll-list-item-title">{poll.pollTitle}</div>
+              <div className="poll-list-item-id">{poll.pollId}</div>
+            </Link>
           )
         )}
-      </ListGroup>
+      </div>
     </div>
   );
 }
