@@ -54,6 +54,7 @@ module.exports = {
             });
           }
         }).done(() => {
+          console.log('-------', link);
           res.json(link);
         });
       });

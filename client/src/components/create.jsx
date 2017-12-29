@@ -1,17 +1,12 @@
 import React from 'react';
-import Form from 'react-bootstrap/lib/Form.js';
-import FormGroup from 'react-bootstrap/lib/FormGroup.js';
-import FormControl from 'react-bootstrap/lib/FormControl.js';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock.js';
 import ChoicesList from './choicesList.jsx';
-import Button from 'react-bootstrap/lib/Button.js';
 import $ from 'jquery';
+import { Redirect } from 'react-router-dom';
 
 class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfChoices: 4,
       titleValue: '',
       descValue: '',
       choicesValues: ['', '', '', ''],
@@ -19,6 +14,7 @@ class Create extends React.Component {
       choicesBoolean: false,
       titleBoolean: false,
       addChoicesBoolean: true,
+      created: '',
     };
     this.titleChange = this.titleChange.bind(this);
     this.descChange = this.descChange.bind(this);
@@ -26,6 +22,7 @@ class Create extends React.Component {
     this.choiceAddLength = this.choiceAddLength.bind(this);
     this.createPoll = this.createPoll.bind(this);
     this.addChoices = this.addChoices.bind(this);
+    this.removeModal = this.removeModal.bind(this);
     // this.formatFinalChoices = this.formatFinalChoices.bind(this);
   }
 
@@ -76,17 +73,9 @@ class Create extends React.Component {
     })
   }
 
-  // formatFinalChoices() {
-  //   let choices = [];
-  //   for (let i = 0; i < this.state.choicesValues.length; i++) {
-  //     if (this.state.choicesValues[i].trim() !== "") {
-  //       choices.push(this.state.choicesValues[i]);
-  //     }
-  //   }
-  //   this.setState({
-  //     finalChoices: choices,
-  //   });
-  // }
+  removeModal() {
+    $(".modal-backdrop.fade.show").remove();
+  }
 
   createPoll(e) {
     e.preventDefault();
@@ -105,14 +94,19 @@ class Create extends React.Component {
       success: (data) => {
         console.log('success!', data);
         console.log('input data', postObject);
-
-//***************** */
-
+        this.setState({
+          created: data,
+        });
+        this.removeModal();
       }
     });
   }
 
   render() {
+    if (this.state.created !== '') {
+      return <Redirect to={`/results/${this.state.created}`} />;
+    }
+
     return (
       <div className="create-component">
         <div className="card main-create-card">
@@ -210,7 +204,7 @@ class Create extends React.Component {
                       {this.state.addChoicesBoolean ? 
                         (
                           <div className="add-choices">
-                            <button type="button" className="btn btn-outline-primary btn-sm add-choices-btn" onClick={this.addChoices}>Add more choices</button>
+                            <button type="button" className="btn btn-outline-primary btn-sm add-choices-btn" onClick={() => {this.removeModal(); this.addChoices()}}>Add more choices</button>
                           </div>
                         ) : null
                       }
@@ -220,9 +214,54 @@ class Create extends React.Component {
                   </div>
                 </fieldset>
 
-                <button type="submit" className="btn btn-success btn-lg btn-block create-btn" onClick={this.createPoll} disabled={!this.state.titleBoolean || !this.state.choicesBoolean}>
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#creationConfirmation"
+                  className="btn btn-success btn-lg btn-block create-btn"
+                  disabled={!this.state.titleBoolean || !this.state.choicesBoolean}
+                >
                   Create
                 </button>
+
+                <div
+                  className="modal fade"
+                  id="creationConfirmation"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="creationConfirmationTitle"
+                  aria-hidden="true"
+                >
+
+                  <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+
+
+
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="creationConfirmationTitle">Is this ok?</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div className="modal-body">
+                        <p>{this.state.titleValue}</p>
+                        <p>{this.state.descValue}</p>
+                        <p>{this.state.finalChoices}</p>
+                      </div>
+
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={this.createPoll}>Looks good!</button>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+
+                </div>
 
               </div>
             </div>

@@ -16,7 +16,6 @@ class Results extends React.Component {
     this.state = {
       pollId: props.match.params.id,
       pollResults: {},
-
     }
   }
 
@@ -38,13 +37,13 @@ class Results extends React.Component {
   render() {
     return (this.state.pollResults === 'ERROR' || !this.state.pollResults.pollId) ?
       (
-        <div>
+        <div onLoad={this.removeModal}>
           COULD NOT FIND POLL
         </div>
       )
     :
       (
-        <div>
+        <div onLoad={this.removeModal}>
           {JSON.stringify(this.state.pollResults)}
           <div className="card" defaultExpanded header={this.state.pollResults.pollTitle}>
             {this.state.pollResults.pollDesc}
