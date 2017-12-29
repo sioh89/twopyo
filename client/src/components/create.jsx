@@ -17,12 +17,14 @@ class Create extends React.Component {
       choicesValues: ['', '', '', ''],
       choicesBoolean: false,
       titleBoolean: false,
+      addChoicesBoolean: true,
     };
     this.titleChange = this.titleChange.bind(this);
     this.descChange = this.descChange.bind(this);
     this.choiceValueChange = this.choiceValueChange.bind(this);
     this.choiceAddLength = this.choiceAddLength.bind(this);
     this.createPoll = this.createPoll.bind(this);
+    this.addChoices = this.addChoices.bind(this);
   }
 
   titleChange(e) {
@@ -62,13 +64,28 @@ class Create extends React.Component {
     });
   }
 
+  addChoices() {
+    this.setState({
+      choicesValues: this.state.choicesValues.concat(['', '', '', '', '', '']),
+      addChoicesBoolean: false,
+    })
+  }
+
   createPoll(e) {
     e.preventDefault();
+
+    let choices = [];
+    for (let i = 0; i < this.state.choicesValues.length; i++) {
+      if (this.state.choicesValues[i].trim() !== "") {
+        choices.push(this.state.choicesValues[i]);
+      }
+    }
+
     let postObject = {};
     postObject.owner = 'admin';
     postObject.pollTitle = this.state.titleValue;
     postObject.pollDesc = this.state.descValue;
-    postObject.choices = this.state.choicesValues;
+    postObject.choices = choices;
 
     $.ajax({
       url: 'http://localhost:3000/polls',
@@ -175,6 +192,15 @@ class Create extends React.Component {
                           </div>
                         )
                       )}
+
+
+                      {this.state.addChoicesBoolean ? 
+                        (
+                          <div className="add-choices">
+                            <button type="button" className="btn btn-outline-primary btn-sm add-choices-btn" onClick={this.addChoices}>Add more choices</button>
+                          </div>
+                        ) : null
+                      }
 
                     </div>
 

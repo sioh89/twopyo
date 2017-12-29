@@ -59,13 +59,17 @@
   background: inherit;
 }
 
-.btn, .btn:hover {
+.create-btn, .create-btn:hover {
+  height: 70px;
+  margin-top: 25px;
+  font-weight: bold;
+  font-size: 35px;
   border-radius: 0px;
   background-color: #93C178;
   border-color: #93C178;
 }
 
-.btn:disabled {
+.create-btn:disabled {
   border-radius: 0px;
   background-color: #dfdce3;
   border-color: #dfdce3;
@@ -93,12 +97,6 @@
   border-radius: 0px;
 }
 
-.form-control:focus {
-  outline: none;
-  border-color: inherit;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
 
 .create-form-control {
   padding-right: 40px;
@@ -106,13 +104,6 @@
 
 .form-group {
   margin-bottom: 0px;
-}
-
-.create-btn {
-  height: 70px;
-  margin-top: 30px;
-  font-weight: bold;
-  font-size: 35px;
 }
 
 .create-banner {
@@ -131,4 +122,26 @@
   margin-top: 15px;
   font-weight: bold;
   color: #DFDCE3;
+}
+
+.add-choices-btn {
+  color: #93C178;
+  border-color: #93C178;
+  background-color: transparent;
+  margin-top: 15px;
+  float: right;
+}
+
+.add-choices-btn:hover {
+  color: #93C178;
+  border-color: #93C178;
+  background-color: transparent;
+  box-shadow: 1px 1px #DFDCE3;
+}
+
+*:focus {
+  outline: 0;
+  border-color: #93C178;
+  -webkit-box-shadow: none;
+  box-shadow: none !important;
 }
