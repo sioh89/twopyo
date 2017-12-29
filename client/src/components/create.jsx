@@ -15,6 +15,7 @@ class Create extends React.Component {
       titleValue: '',
       descValue: '',
       choicesValues: ['', '', '', ''],
+      finalChoices: [],
       choicesBoolean: false,
       titleBoolean: false,
       addChoicesBoolean: true,
@@ -25,6 +26,7 @@ class Create extends React.Component {
     this.choiceAddLength = this.choiceAddLength.bind(this);
     this.createPoll = this.createPoll.bind(this);
     this.addChoices = this.addChoices.bind(this);
+    // this.formatFinalChoices = this.formatFinalChoices.bind(this);
   }
 
   titleChange(e) {
@@ -46,15 +48,18 @@ class Create extends React.Component {
     let tempIndex = parseInt(e.target.id.split('-')[1]);
     tempArray[tempIndex] = e.target.value;
     let numChoices = 0;
+    let choicesArr = [];
     for (let i = 0; i < tempArray.length; i++) {
       let temp = tempArray[i];
       if (temp.trim() !== "") {
         numChoices++;
+        choicesArr.push(temp);
       }
     }
     this.setState({
       choicesValues: tempArray,
       choicesBoolean: !(numChoices < 2),
+      finalChoices: choicesArr,
     });
   }
 
@@ -71,21 +76,27 @@ class Create extends React.Component {
     })
   }
 
+  // formatFinalChoices() {
+  //   let choices = [];
+  //   for (let i = 0; i < this.state.choicesValues.length; i++) {
+  //     if (this.state.choicesValues[i].trim() !== "") {
+  //       choices.push(this.state.choicesValues[i]);
+  //     }
+  //   }
+  //   this.setState({
+  //     finalChoices: choices,
+  //   });
+  // }
+
   createPoll(e) {
     e.preventDefault();
 
-    let choices = [];
-    for (let i = 0; i < this.state.choicesValues.length; i++) {
-      if (this.state.choicesValues[i].trim() !== "") {
-        choices.push(this.state.choicesValues[i]);
-      }
-    }
-
+    console.log('---finalChoices: ', this.state.finalChoices);
     let postObject = {};
     postObject.owner = 'admin';
     postObject.pollTitle = this.state.titleValue;
     postObject.pollDesc = this.state.descValue;
-    postObject.choices = choices;
+    postObject.choices = this.state.finalChoices;
 
     $.ajax({
       url: 'http://localhost:3000/polls',
@@ -94,7 +105,9 @@ class Create extends React.Component {
       success: (data) => {
         console.log('success!', data);
         console.log('input data', postObject);
-        // this.props.goToIndex();
+
+//***************** */
+
       }
     });
   }
