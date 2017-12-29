@@ -3,8 +3,17 @@
   text-align: center;
 }
 
-.main-card {
+.create-component {
+  width: 100%;
+}
+
+.main-home-card {
   width: 400px;
+  margin: 0 auto;
+}
+
+.main-create-card {
+  width: 800px;
   margin: 0 auto;
 }
 
@@ -48,4 +57,78 @@
 .to-create .list-group-item:hover {
   color: inherit;
   background: inherit;
+}
+
+.btn, .btn:hover {
+  border-radius: 0px;
+  background-color: #93C178;
+  border-color: #93C178;
+}
+
+.btn:disabled {
+  border-radius: 0px;
+  background-color: #dfdce3;
+  border-color: #dfdce3;
+  text-shadow: 1px 1px grey;
+}
+
+.create-label {
+  padding-left: 40px;
+}
+
+.create-form {
+  padding-top: 15px;
+}
+
+.create-form > .row {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #ced4da;
+  border-radius: 0px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.create-form-control {
+  padding-right: 40px;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.create-btn {
+  height: 70px;
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.create-banner {
+  border: 0px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 50px;
+  text-align: center;
+  background-color: #465C8B;
+}
+
+.create-banner-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #DFDCE3;
 }

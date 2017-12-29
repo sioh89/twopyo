@@ -16,7 +16,7 @@ class Create extends React.Component {
       descValue: '',
       choicesValues: ['', '', '', ''],
       choicesBoolean: false,
-      titleBoolean: false
+      titleBoolean: false,
     };
     this.titleChange = this.titleChange.bind(this);
     this.descChange = this.descChange.bind(this);
@@ -41,19 +41,19 @@ class Create extends React.Component {
 
   choiceValueChange(e) {
     let tempArray = this.state.choicesValues.slice();
-    let tempIndex = parseInt(e.target.className.split(' ')[0]);
+    let tempIndex = parseInt(e.target.id.split('-')[1]);
     tempArray[tempIndex] = e.target.value;
-    let atLeastOneChoice = true;
+    let numChoices = 0;
     for (let i = 0; i < tempArray.length; i++) {
       let temp = tempArray[i];
-      if (!/\S/.test(temp)) {
-        atLeastOneChoice = false;
+      if (temp.trim() !== "") {
+        numChoices++;
       }
     }
     this.setState({
       choicesValues: tempArray,
-      choicesBoolean: atLeastOneChoice
-    })
+      choicesBoolean: !(numChoices < 2),
+    });
   }
 
   choiceAddLength() {
@@ -76,48 +76,121 @@ class Create extends React.Component {
       data: postObject,
       success: (data) => {
         console.log('success!', data);
-        this.props.goToIndex();
+        console.log('input data', postObject);
+        // this.props.goToIndex();
       }
     });
   }
 
   render() {
     return (
-      <div>
-        <form>
-          <FormGroup controlId="createNewPoll" onSubmit={this.createPoll}>
+      <div className="create-component">
+        <div className="card main-create-card">
 
-            <FormControl
-              type="text"
-              value={this.state.titleValue}
-              placeholder="Polling question (required)"
-              onChange={this.titleChange}
-              bsSize="large"
-              maxLength="50"
-              ></FormControl>
-            <HelpBlock>{this.state.titleValue.length}/50</HelpBlock>
-            
-            <FormControl
-              type="text"
-              value={this.state.descValue}
-              placeholder="More information (optional)"
-              onChange={this.descChange}
-              maxLength="160"
-            ></FormControl>
-            <HelpBlock>{this.state.descValue.length}/160</HelpBlock>
-            
-            <h4>Choices:</h4>
-            <ChoicesList
-              choicesValues={this.state.choicesValues}
-              choiceValueChange={this.choiceValueChange}
-              choiceAddLength={this.choiceAddLength}
-              />
+          <form  onSubmit={this.createPoll}>
+            <div className="form-group">
 
-          </FormGroup>
-          <Button type="submit" onClick={this.createPoll} disabled={!this.state.titleBoolean || !this.state.choicesBoolean}>
-            Create
-          </Button>
-        </form>
+              <div className="create-banner">
+                <p className="create-banner-text">Create a new poll</p>
+              </div>
+
+              <div className="create-form">
+
+                <div className="row">
+                  <div className="col-sm-3 col-form-label create-label">
+                    <label for="inputTitle" className="">
+                      Poll title
+                    </label>
+                  </div>
+                  <div className="col-sm-9  create-form-control">
+                    <input
+                      className="form-control"
+                      id="inputTitle"
+                      aria-describedby="titleHelpBlock"
+                      type="text"
+                      value={this.state.titleValue}
+                      placeholder="Polling question (required)"
+                      onChange={this.titleChange}
+                      bsSize="large"
+                      maxLength="50"
+                      ></input>
+                    <small id="titleHelpBlock" className="form-text text-muted">{this.state.titleValue.length}/50</small>
+                  </div>
+
+                </div>
+
+                <hr/>
+
+                <div className="row">
+
+                  <div className="col-sm-3 col-form-label create-label">
+                    <label for="inputDesc">
+                      Description
+                    </label>
+                  </div>
+                  <div className="col-sm-9 create-form-control">
+
+                    <input
+                      className="form-control"
+                      id="inputDesc"
+                      aria-describedby="descHelpBlock"
+                      type="text"
+                      value={this.state.descValue}
+                      placeholder="More information (optional)"
+                      onChange={this.descChange}
+                      maxLength="160"
+                    ></input>
+                    <small id="descHelpBlock" className="form-text text-muted">{this.state.descValue.length}/160</small>
+                  </div>
+
+                </div>
+
+                <hr/>
+
+                <fieldset>
+                  <div className="row">
+
+                    <div className="col-form-label col-sm-3 create-label">
+                      <label>Choices</label>
+                      <small id="choicesHelpBlock" className="form-text text-muted">Please input at least two choices</small>
+                    </div>
+
+                    <div className="col-sm-9 create-form-control">
+
+                      {this.state.choicesValues.map((choice, index) => 
+                        (
+                          <div key={`div${index}`} className="choice-item">
+                            <input
+                              key={index}
+                              className="form-control"
+                              aria-describedby
+                              type="text"
+                              name="choicesBlock"
+                              id={'choice-'+index}
+                              value={choice}
+                              onChange={this.choiceValueChange}
+                              maxLength="160"
+                            />
+                            <small id={`option${index}HelpBlock`} className="form-text text-muted">{choice.length}/50</small>
+                          </div>
+                        )
+                      )}
+
+                    </div>
+
+                  </div>
+                </fieldset>
+
+                <button type="submit" className="btn btn-success btn-lg btn-block create-btn" onClick={this.createPoll} disabled={!this.state.titleBoolean || !this.state.choicesBoolean}>
+                  Create
+                </button>
+
+              </div>
+            </div>
+
+          </form>
+
+        </div>
       </div>
     );
   }

@@ -31,7 +31,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-component">
-        <div className="card main-card">
+        <div className="card main-home-card">
           <div className="to-create">
             <Link className="list-group-item list-group-item-action" to="/create"><span>Create a poll</span></Link>
           </div>
