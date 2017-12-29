@@ -32,8 +32,8 @@ class Home extends React.Component {
     return (
       <div className="home-component">
         <div className="card main-card">
-          <div className="btn to-create">
-            <Link to="/create">Create a poll</Link>
+          <div className="to-create">
+            <Link className="list-group-item list-group-item-action" to="/create"><span>Create a poll</span></Link>
           </div>
           <div className="list">
             <PollsList polls={this.state.polls} />

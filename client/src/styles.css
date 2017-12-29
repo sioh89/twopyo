@@ -29,3 +29,23 @@
   font-size: 75%;
   opacity: 0.5;
 }
+
+.to-create .list-group-item {
+  border: 0px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 50px;
+  text-align: center;
+}
+
+.to-create .list-group-item span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-top: -30px;
+}
+
+.to-create .list-group-item:hover {
+  color: inherit;
+  background: inherit;
+}
