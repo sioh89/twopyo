@@ -5,7 +5,6 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
-import PollEntry from './pollEntry.jsx'
 
 let PollList = function(props) {
   console.log('from polllist', props.polls[0]);

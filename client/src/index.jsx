@@ -7,7 +7,6 @@ import {
   Switch
 } from 'react-router-dom';
 import $ from 'jquery';
-import { Button } from 'react-bootstrap';
 import PollList from './components/pollList.jsx';
 import Create from './components/create.jsx';
 import Results from './components/results.jsx';

@@ -1,5 +1,4 @@
 import React from 'react';
-import ChoicesList from './choicesList.jsx';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
 
