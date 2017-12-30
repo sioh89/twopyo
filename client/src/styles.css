@@ -1,3 +1,12 @@
+h1, h2, h3, h4, h5, h6, p, span, div {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+}
+
+h1 {
+  font-weight: 400;
+}
+
 .home-component {
   width: 100%;
   text-align: center;
@@ -8,7 +17,7 @@
 }
 
 .main-home-card {
-  width: 400px;
+  width: 600px;
   margin: 0 auto;
 }
 
@@ -29,6 +38,10 @@
   border-left: 0px;
 }
 
+.polls-list {
+  margin-top: 10px;
+}
+
 .poll-item {
   padding-top: 6px;
   padding-bottom: 6px;
@@ -39,25 +52,36 @@
   opacity: 0.5;
 }
 
+.to-create {
+  background-color: #6b8e56;
+}
+
 .to-create .list-group-item {
   border: 0px;
   height: 150px;
   line-height: 150px;
   font-size: 50px;
   text-align: center;
+  background-color: #93c178;
 }
 
-.to-create .list-group-item span {
+.to-create .list-group-item h1{
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
   margin-top: -30px;
+  color: #DFDCE3;
 }
 
 .to-create .list-group-item:hover {
   color: inherit;
   background: inherit;
 }
+
+.list-group-item.list-group-item-action.btn:hover {
+  background-color: #85ad6b;
+  color: rgb(253, 253, 253);  
+}  
 
 .create-btn, .create-btn:hover {
   height: 70px;
@@ -120,7 +144,7 @@
   vertical-align: middle;
   line-height: normal;
   margin-top: 15px;
-  font-weight: bold;
+  font-weight: 400;
   color: #DFDCE3;
 }
 
@@ -145,3 +169,8 @@
   -webkit-box-shadow: none;
   box-shadow: none !important;
 }
+
+.create-btn:hover {
+  background-color: #85ad6b;
+  color: rgb(253, 253, 253);  
+} 

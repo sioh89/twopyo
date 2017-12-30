@@ -204,7 +204,7 @@ class Create extends React.Component {
                       {this.state.addChoicesBoolean ? 
                         (
                           <div className="add-choices">
-                            <button type="button" className="btn btn-outline-primary btn-sm add-choices-btn" onClick={() => {this.removeModal(); this.addChoices()}}>Add more choices</button>
+                            <button type="button" className="btn btn-outline-primary btn-sm add-choices-btn" onClick={() => {this.removeModal(); this.addChoices()}}><span>Add more choices</span></button>
                           </div>
                         ) : null
                       }

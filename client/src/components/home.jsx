@@ -33,9 +33,9 @@ class Home extends React.Component {
       <div className="home-component">
         <div className="card main-home-card">
           <div className="to-create">
-            <Link className="list-group-item list-group-item-action" to="/create"><span>Create a poll</span></Link>
+            <Link className="list-group-item list-group-item-action btn" to="/create"><h1>Create a poll</h1></Link>
           </div>
-          <div className="list">
+          <div className="polls-list">
             <PollsList polls={this.state.polls} />
           </div>
         </div>
