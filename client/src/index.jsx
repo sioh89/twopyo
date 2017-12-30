@@ -87,10 +87,32 @@ class App extends React.Component {
       <div>
         <Router>
           <div>
-            <Link to="/"><h1>Poll Call</h1></Link>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+              <Link to="/home" className="navbar-brand"><h1>Poll Call</h1></Link>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div className="collapse navbar-collapse">
+                <ul className="nav navbar-nav">
+                  <li className="nav-item">
+                    <Link to="/home" className="nav-link">Home</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/create" className="nav-link">Create</Link>
+                  </li>
+                </ul>
+
+                <ul className="nav navbar-nav navbar-right ml-md-auto">
+                  <li className="nav-item form-inline">
+                    <Link to="/" className="nav-link">Logout</Link>
+                  </li>
+                </ul>
+              </div>
+            </nav>
             
             <Switch>
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/home" component={Home}/>
               <Route path="/create" component={Create}/>
               <Route path="/results/:id" component={Results}/>
               <Route path="/:id" component={Vote}/>

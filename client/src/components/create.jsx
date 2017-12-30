@@ -135,7 +135,6 @@ class Create extends React.Component {
                       value={this.state.titleValue}
                       placeholder="Polling question (required)"
                       onChange={this.titleChange}
-                      bsSize="large"
                       maxLength="50"
                       ></input>
                     <small id="titleHelpBlock" className="form-text text-muted">{this.state.titleValue.length}/50</small>
@@ -227,7 +226,7 @@ class Create extends React.Component {
                 <div
                   className="modal fade"
                   id="creationConfirmation"
-                  tabindex="-1"
+                  tabIndex="-1"
                   role="dialog"
                   aria-labelledby="creationConfirmationTitle"
                   aria-hidden="true"
