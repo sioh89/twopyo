@@ -113,8 +113,8 @@ class Create extends React.Component {
           <form  onSubmit={this.createPoll}>
             <div className="form-group">
 
-              <div className="create-banner">
-                <p className="create-banner-text">Create a new poll</p>
+              <div className="blue-banner">
+                <p className="blue-banner-text">Create a new poll</p>
               </div>
 
               <div className="create-form">

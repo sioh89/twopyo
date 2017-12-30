@@ -12,6 +12,7 @@ import Create from './components/create.jsx';
 import Results from './components/results.jsx';
 import Vote from './components/vote.jsx';
 import Home from './components/home.jsx';
+import Landing from './components/landing.jsx';
 import './styles.css';
 
 
@@ -87,7 +88,7 @@ class App extends React.Component {
         <Router>
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-              <Link to="/home" className="navbar-brand"><h1>Poll Call</h1></Link>
+              <Link to="/" className="navbar-brand"><h1>Poll Call</h1></Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
@@ -111,7 +112,8 @@ class App extends React.Component {
             </nav>
             
             <Switch>
-              <Route exact path="/home" component={Home}/>
+              <Route exact path="/" component={Landing}/>
+              <Route path="/home" component={Home}/>
               <Route path="/create" component={Create}/>
               <Route path="/results/:id" component={Results}/>
               <Route path="/:id" component={Vote}/>

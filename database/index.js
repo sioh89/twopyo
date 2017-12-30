@@ -16,7 +16,8 @@ sequelize
   });
 
 const User = sequelize.define('user', {
-  name: Sequelize.STRING(20)
+  name: Sequelize.STRING(20),
+  password: Sequelize.STRING,
 });
 
 const Poll = sequelize.define('poll', {

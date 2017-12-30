@@ -27,23 +27,38 @@ h1 {
   padding-bottom: 10px;
 }
 
+.card {
+  border-radius: 0px;
+}
+
 .main-home-card {
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
+  margin-top: 100px;
 }
 
 .main-create-card {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto;
+  margin-top: 100px;  
 }
 
 .main-vote-card {
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
+  margin-top: 100px;  
 }
 
-.card {
-  border-radius: 0px;
+.landing-vote-card {
+  width: 400px;
+  margin: 20px;
+  background-color: #93c178;  
+}
+
+.landing-login-card {
+  width: 400px;
+  margin: 20px;
+  background-color: #465C8B;  
 }
 
 .list-group-item,
@@ -163,7 +178,7 @@ h1 {
   margin-bottom: 0px;
 }
 
-.create-banner {
+.blue-banner {
   border: 0px;
   height: 150px;
   line-height: 150px;
@@ -172,13 +187,31 @@ h1 {
   background-color: #465C8B;
 }
 
-.create-banner-text {
+.blue-banner-text {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
   margin-top: 15px;
   font-weight: 400;
   color: #DFDCE3;
+}
+
+.green-banner {
+  border: 0px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 50px;
+  text-align: center;
+  background-color: #93c178;
+}
+
+.green-banner-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin-top: 15px;
+  font-weight: 400;
+  color: #4c4a50;
 }
 
 .add-choices-btn {
@@ -264,4 +297,84 @@ h1 {
 
 .btn-light-text:hover {
   color: #FDFDFD;
+}
+
+.landing-card-input-group {
+  padding: 20px;
+}
+
+.landing-card-vote-input {
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  background-color: #FDFDFD;
+  border: 1px solid #536d44;
+}
+
+.landing-card-vote-input:focus {
+  z-index: 2 !important;
+}
+
+.landing-card-vote-form {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.landing-vote-card-btn {
+  background-color: #FDFDFD;
+  border-color: #536d44;
+  color: #536d44;
+}
+
+.landing-vote-card-btn:hover {
+  background-color: #FDFDFD;
+  border-color: #536d44;
+  color: #536d44;
+}
+
+.landing-login-form {
+  padding: 20px;
+}
+
+.login-btn-container {
+  padding-top: 20px;
+}
+
+.landing-login-card-btn {
+  background-color: #FDFDFD;
+  border-color: #36353a;
+  color: #36353a;
+  float: right;
+}
+
+.landing-login-card-btn:hover {
+  background-color: #FDFDFD;
+  border-color: #36353a;
+  color: #36353a;
+}
+
+.landing-card-login-input {
+  border-radius: .25rem;
+  background-color: #FDFDFD;
+  border: 1px solid #36353a;
+}
+
+.landing-card-login-input:focus {
+  z-index: 2 !important;
+}
+
+.vote-id-help {
+  text-align: center;
+  color: #4c4a50 !important;
+}
+
+#inputEmail, #inputPassword {
+  margin-top: -10px;
+}
+
+.password-form-group {
+  margin-top: 10px;
+}
+
+.login-signup-change {
+  color: #DFDCE3;
 }
