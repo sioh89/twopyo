@@ -1,22 +1,80 @@
 import React from 'react';
+import axios from 'axios';
 
 class Landing extends React.Component {
   constructor() {
     super();
     this.state = {
       loginState: 'Login',
+      email: '',
+      password: '',
+      confirmation: '',
+      emailValid: true,
+      passwordValid: true,
+      confirmationValid: true,
     }
     this.toggleLogin = this.toggleLogin.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmationChange = this.handleConfirmationChange.bind(this);
+    this.validateEmailFormat = this.validateEmailFormat.bind(this);
   }
 
   toggleLogin() {
     if (this.state.loginState === 'Login') {
-      this.setState({ loginState: 'Sign Up'});
+      this.setState({
+        loginState: 'Sign Up',
+        password: '',
+        confirmation: '',
+        emailValid: true,
+        passwordValid: true,
+        confirmationValid: true,
+      });
     }
 
     if (this.state.loginState === 'Sign Up') {
-      this.setState({ loginState: 'Login'});
+      this.setState({
+        loginState: 'Login',
+        password: '',
+        confirmation: '',
+        emailValid: true,
+        passwordValid: true,
+        confirmationValid: true,
+      });
     }
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+
+    const eVal = this.validateEmailFormat(this.state.email);
+    const pVal = this.state.password.length >= 6 && this.state.password.length <= 20;
+    const cVal = this.state.confirmation.length === this.state.password;
+
+    this.setState({
+      password: '',
+      confirmation: '',
+      emailValid: eVal,
+      passwordValid: pVal,
+      confirmationValid: cVal,
+    });
+  }
+
+  handleEmailChange(e) {
+    this.setState({ email: e.target.value});
+  }
+
+  handlePasswordChange(e) {
+    this.setState({ password: e.target.value});
+  }
+
+  handleConfirmationChange(e) {
+    this.setState({ confirmation: e.target.value});
+  }
+
+  validateEmailFormat(email) {
+    return /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/.test(email.toLowerCase());
   }
 
   render() {
@@ -58,26 +116,29 @@ class Landing extends React.Component {
           <form className="landing-login-form">
             <div className="form-group email-form-group">
               <label for="inputEmail">Email address</label>
-              <input type="email" className="form-control landing-card-login-input" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"/>
+              <input type="email" value={this.state.email} className={`form-control landing-card-login-input${this.state.emailValid ? '' : ' input-error'}`} id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleEmailChange}/>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group password-form-group row">
-              <div class="col-md">
+              <div className="col-md">
                 <label for="inputPassword">Password</label>
-                <input type="password" className="form-control landing-card-login-input" id="inputPassword" placeholder="Password"/>
+                <input type="password" value={this.state.password} className={`form-control landing-card-login-input${this.state.passwordValid ? '' : ' input-error'}`} id="inputPassword" aria-describedby="passwordHelp" placeholder="Password" onChange={this.handlePasswordChange}/>
+                <small id="passwordHelp" className="form-text text-muted" style={{visibility: this.state.loginState === 'Sign Up' ? 'visible' : 'hidden'}}>Your password must be 6-20 characters</small>
               </div>
-              <div class="col-md" style={{display: this.state.loginState === 'Sign Up' ? 'block' : 'none'}}>
-                <label for="inputPassword">Confirm</label>
-                <input type="password" className="form-control landing-card-login-input" id="inputPassword" placeholder="Confirm password"/>
+              <div className="col-md" style={{display: this.state.loginState === 'Sign Up' ? 'block' : 'none'}}>
+                <label for="inputConfirmation">Confirm</label>
+                <input type="password" value={this.state.confirmation} className={`form-control landing-card-login-input${this.state.confirmationValid ? '' : ' input-error'}`} id="inputConfirmation" aria-describedby="confirmationHelp" placeholder="Confirm password" onChange={this.handleConfirmationChange}/>
+                <small id="confirmationHelp" className="form-text text-muted">Please type your password again.</small>
               </div>
             </div>
 
             <div className="login-btn-container">
                 <span className="login-signup-change" onClick={this.toggleLogin}>{'Click here to go to ' + this.state.loginState}</span>
-                <button type="button" className="btn btn-outline-primary landing-login-card-btn">{this.state.loginState}</button>
+                <button type="submit" className="btn btn-outline-primary landing-login-card-btn" onClick={this.handleLogin}>{this.state.loginState}</button>
             </div>
 
           </form>
+
         </div>
 
         </div>

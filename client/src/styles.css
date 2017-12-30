@@ -367,7 +367,7 @@ h1 {
   color: #4c4a50 !important;
 }
 
-#inputEmail, #inputPassword {
+#inputEmail, #inputPassword, #inputConfirmation {
   margin-top: -10px;
 }
 
@@ -377,4 +377,8 @@ h1 {
 
 .login-signup-change {
   color: #DFDCE3;
+}
+
+.input-error {
+  border: 1px solid red !important;
 }
