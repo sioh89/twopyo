@@ -16,6 +16,17 @@ h1 {
   width: 100%;
 }
 
+.vote-component {
+  width: 100%;
+}
+
+.btn-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
 .main-home-card {
   width: 600px;
   margin: 0 auto;
@@ -23,6 +34,11 @@ h1 {
 
 .main-create-card {
   width: 800px;
+  margin: 0 auto;
+}
+
+.main-vote-card {
+  width: 600px;
   margin: 0 auto;
 }
 
@@ -56,6 +72,23 @@ h1 {
   background-color: #6b8e56;
 }
 
+.btn-primary {
+  background-color: #93C178;
+  border-color: #93C178;
+  color: #4c4a50;
+}
+
+.btn-primary:hover {
+  background-color: #98cc75;
+  border-color: #98cc75;
+  color: #4c4a50;
+}
+
+.btn-primary:disabled {
+  background-color: #dfdce3;
+  border-color: #dfdce3;
+}
+
 .to-create .list-group-item {
   border: 0px;
   height: 150px;
@@ -70,7 +103,7 @@ h1 {
   vertical-align: middle;
   line-height: normal;
   margin-top: -30px;
-  color: #DFDCE3;
+  color: #4c4a50;
 }
 
 .to-create .list-group-item:hover {
@@ -79,7 +112,7 @@ h1 {
 }
 
 .list-group-item.list-group-item-action.btn:hover {
-  background-color: #85ad6b;
+  background-color: #98cc75;
   color: rgb(253, 253, 253);  
 }  
 
@@ -171,6 +204,43 @@ h1 {
 }
 
 .create-btn:hover {
-  background-color: #85ad6b;
-  color: rgb(253, 253, 253);  
+  background-color: #98cc75;
+  color: #fdfdfd;  
 } 
+
+.poll-choice-item.active {
+  background-color:#f7ee6a96;
+  border-color: #f7ee6a96;
+  color: black;
+}
+
+.vote-banner {
+  border: 0px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 50px;
+  text-align: center;
+  background-color: #465C8B;
+  border-color: #465C8B;
+  color: #DFDCE3;
+  min-height: 150px;
+}
+
+.vote-card-title.card-title {
+  padding: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+#result-link-text {
+  margin-top: 1px;
+  margin-left: 1px;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.badge-primary {
+  color: #fdfdfd;
+  background-color: #93c178;
+}

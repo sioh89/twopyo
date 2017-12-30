@@ -1,13 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  FormGroup,
-  Radio,
-  Button,
-  Jumbotron,
-  ListGroup,
-  ListGroupItem,
-} from 'react-bootstrap';
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 class Vote extends React.Component {
   constructor(props) {
@@ -16,15 +12,35 @@ class Vote extends React.Component {
       pollId: this.props.match.params.id,
       poll: {},
       selected: -1,
+      voted: false,
     };
+    this.selectItem = this.selectItem.bind(this);
+    this.registerVote = this.registerVote.bind(this);
   }
 
   selectItem(e) {
     e.preventDefault();
-    console.log('selected', e.target.value);
+    $(".poll-choice-item").removeClass("active");
+    $(e.target).addClass("active");
     this.setState({
       selected: e.target.value,
+    });
+  }
+
+  registerVote() {
+    axios.post('/castVote', {
+      pollId: this.state.pollId,
+      choiceNumber: this.state.selected,
     })
+      .then(res => {
+        console.log('cast vote', res)
+        this.setState({
+          voted: true,
+        });
+      })
+      .catch(err => {
+        console.log('cast vote err', err);
+      })
   }
 
   componentDidMount() {
@@ -37,27 +53,60 @@ class Vote extends React.Component {
   }
 
   render() {
+    if (!this.state.poll.pollId)
+      return (
+        <div onLoad={this.removeModal}>
+          COULD NOT FIND POLL
+        </div>
+      );
+
+    if (this.state.voted) {
+      return <Redirect to={`/results/${this.state.pollId}`} />;
+    }
+
     return (
-      <div>
-        {JSON.stringify(this.state.poll)}
-        <form>
-          <div className="jumbotron">
-            <h1 className="poll-title">{this.state.poll.pollTitle}</h1>
-            <p className="poll-description">{this.state.poll.pollDesc}</p>
-            <ul className="list-group poll-choices"  onClick={this.selectItem.bind(this)}>
-              {this.state.poll.choices && this.state.poll.choices.map((choice) =>
-                (
-                  <li key={choice.id} value={choice.id} className="list-group-item poll-choice-item">
-                    {choice.text}
-                    <div>
-                      <img src="left.svg" className="selected-icon" style={{visibility: this.state.selected === this.value ? 'visible' : 'hidden' }}/>
-                    </div>
-                  </li>
-                )
-              )}
-            </ul>
+      <div className="vote-component">
+
+        <div className="card main-vote-card">
+
+          <div className="vote-banner">
+            <h1 className="card-title vote-card-title">{this.state.poll.pollTitle}</h1>
           </div>
-        </form>
+
+          <div className="card-body">
+
+            <p className="card-subtitle mb-2 text-muted">{this.state.poll.pollDesc}</p>
+
+            <form>
+              <ul className="list-group poll-choices"  onClick={this.selectItem.bind(this)}>
+                {this.state.poll.choices && this.state.poll.choices.map((choice) =>
+                  (
+                    <li
+                      key={choice.id}
+                      value={choice.id}
+                      className="list-group-item list-group-item-action poll-choice-item"
+                      onClick={this.selectItem}
+                    >
+                      {choice.text}
+                    </li>
+                  )
+                )}
+              </ul>
+            </form>
+
+          </div>
+          <div className="btn-container">
+            <button
+              className="btn btn-primary"
+              disabled={this.state.selected === -1}
+              onClick={this.registerVote}
+            >
+              Vote
+            </button>
+            <Link to={`/results/${this.state.pollId}`}><p id="result-link-text">Go to results</p></Link>
+          </div>
+        </div>
+
       </div>
     );
   }

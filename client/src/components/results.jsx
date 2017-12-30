@@ -1,11 +1,5 @@
 import React from 'react';
 import ResultsEntry from './resultsEntry.jsx';
-import {
-  Button,
-  Panel,
-  ListGroup,
-  ListGroupItem,
-} from 'react-bootstrap';
 import axios from 'axios';
 
 class Results extends React.Component {
@@ -15,7 +9,7 @@ class Results extends React.Component {
     console.log(props);
     this.state = {
       pollId: props.match.params.id,
-      pollResults: {},
+      poll: {},
     }
   }
 
@@ -24,41 +18,59 @@ class Results extends React.Component {
       .then(res => {
         console.log(res);
         this.setState({
-          pollResults: res.data,
+          poll: res.data,
         });
       })
       .catch(error => {
         this.setState({
-          pollResults: 'ERROR'
+          poll: 'ERROR'
         });
       })
   }
 
   render() {
-    return (this.state.pollResults === 'ERROR' || !this.state.pollResults.pollId) ?
-      (
+    if (this.state.poll === 'ERROR' || !this.state.poll.pollId)
+      return (
         <div onLoad={this.removeModal}>
           COULD NOT FIND POLL
         </div>
-      )
-    :
-      (
-        <div onLoad={this.removeModal}>
-          {JSON.stringify(this.state.pollResults)}
-          <div className="card" defaultExpanded header={this.state.pollResults.pollTitle}>
-            {this.state.pollResults.pollDesc}
-            <ul className="list-group" fill>
-              {this.state.pollResults.choices.map((choice, index) => 
-                (
-                  <li className="list-group-item" key={index}>
-                    <span>{choice.text}</span> <span>{choice.votes}</span>
-                  </li>
-                )
-              )}
-            </ul>
+      );
+    
+    return (
+      <div className="vote-component">
+
+        <div className="card main-vote-card">
+
+          <div className="vote-banner">
+            <h1 className="card-title vote-card-title">{this.state.poll.pollTitle}</h1>
           </div>
+
+          <div className="card-body">
+
+            <p className="card-subtitle mb-2 text-muted">{this.state.poll.pollDesc}</p>
+
+            <form>
+              <ul className="list-group poll-choices">
+                {this.state.poll.choices && this.state.poll.choices.map((choice, index) =>
+                  (
+                    <li
+                      key={`rl-${index}`}
+                      className="list-group-item d-flex justify-content-between align-items-center poll-choice-item"
+                      onClick={this.selectItem}
+                    >
+                      {choice.text}
+                      <span className="badge badge-primary badge-pill">{choice.votes}</span>
+                    </li>
+                  )
+                )}
+              </ul>
+            </form>
+
+          </div>
+
         </div>
-      )
+      </div>
+    );
   }
 }
 
