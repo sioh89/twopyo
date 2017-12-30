@@ -244,14 +244,22 @@ class Create extends React.Component {
                       </div>
 
                       <div className="modal-body">
-                        <p>{this.state.titleValue}</p>
-                        <p>{this.state.descValue}</p>
-                        <p>{this.state.finalChoices}</p>
+                        <div className="card pending-create-card">
+                          <div className="card-body">
+                            <h1 className="card-title">{this.state.titleValue}</h1>
+                            <h6 className="card-subtitle mb-2 text-muted">{this.state.descValue}</h6>
+                            <div className="list-group pending-create-choices">
+                              {this.state.finalChoices.map((choice, index) => 
+                                (<p key={`pc-${index}`} className="list-group-item card-text">{choice}</p>)
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this.createPoll}>Looks good!</button>
+                        <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary btn-light-text" onClick={this.createPoll}>Looks good!</button>
                       </div>
 
 
