@@ -7,6 +7,7 @@ import {
 import axios from 'axios';
 import PollsList from './pollList.jsx';
 import Create from './create.jsx';
+import Navbar from './navbar.js';
 
 class Home extends React.Component {
 
@@ -25,12 +26,12 @@ class Home extends React.Component {
         })
         console.log(this.state.polls);
       });
-
   }
 
   render() {
     return (
       <div className="home-component">
+        <Navbar />
         <div className="card main-home-card">
           <div className="to-create">
             <Link className="list-group-item list-group-item-action btn" to="/create"><h1>Create a poll</h1></Link>

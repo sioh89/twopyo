@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import setAuthorizationToken from '../helpers/tokenHandler.js';
 
 class Landing extends React.Component {
   constructor() {
@@ -53,12 +54,71 @@ class Landing extends React.Component {
     const cVal = this.state.confirmation.length === this.state.password;
 
     this.setState({
-      password: '',
-      confirmation: '',
       emailValid: eVal,
       passwordValid: pVal,
       confirmationValid: cVal,
-    });
+    }, () => {
+        if (this.state.loginState === 'Sign Up'
+            && this.state.emailValid
+            && this.state.passwordValid
+            && this.state.confirmationValid) {
+          axios.post('/createUser', {
+            name: this.state.email,
+            password: this.state.password,
+          })
+          .then((res) => {
+            if (res.status === 204) {
+              console.log('204: user already exists');
+              //~~~~ERROR HANDLING~~~~//
+            } else if (res.status === 400) {
+              console.log('400: error in sign up. try again');
+            } else {
+              //~~~SUCCESS~~~//
+              console.log('RESPONSE: ', res);
+
+              const token = res.data.accessToken;
+              localStorage.setItem('token', token);
+              setAuthorizationToken(token);
+              this.setState({
+                email: '',
+                password: '',
+                confirmation: '',
+              });
+              this.props.history.push('/home');         
+            }
+          });
+        }
+
+        if (this.state.loginState === 'Login'
+            && this.state.emailValid
+            && this.state.passwordValid) {
+          axios.post('/authUser', {
+            name: this.state.email,
+            password: this.state.password,
+          })
+            .then(res => {
+              if (res.status === 204) {
+                console.log('204: user not authenticated')
+              } else if (res.status === 400) {
+                console.log('400: error in authentication. try again');
+              } else {
+                //~~~SUCCESS~~~//
+                console.log('RESPONSE: ', res);
+
+                const token = res.data.accessToken;
+                localStorage.setItem('token', token);
+                setAuthorizationToken(token);
+                this.setState({
+                  email: '',
+                  password: '',
+                  confirmation: '',
+                });
+                this.props.history.push('/home'); 
+              }
+            });
+        }
+      }
+    );
   }
 
   handleEmailChange(e) {

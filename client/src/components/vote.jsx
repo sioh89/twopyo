@@ -4,6 +4,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
+import Navbar from './navbar.js';
 
 class Vote extends React.Component {
   constructor(props) {
@@ -66,6 +67,7 @@ class Vote extends React.Component {
 
     return (
       <div className="vote-component">
+        <Navbar />
 
         <div className="card main-vote-card">
 

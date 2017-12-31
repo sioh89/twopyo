@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Navbar from './navbar.js';
 
 class Results extends React.Component {
 
@@ -37,6 +38,7 @@ class Results extends React.Component {
     
     return (
       <div className="vote-component">
+        <Navbar />
 
         <div className="card main-vote-card">
 

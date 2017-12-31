@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
+import Navbar from './navbar.js';
 
 class Create extends React.Component {
   constructor(props) {
@@ -108,6 +109,7 @@ class Create extends React.Component {
 
     return (
       <div className="create-component">
+        <Navbar />
         <div className="card main-create-card">
 
           <form  onSubmit={this.createPoll}>
