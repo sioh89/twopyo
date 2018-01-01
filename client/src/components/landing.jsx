@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import setAuthorizationToken from '../helpers/tokenHandler.js';
+import Navbar from './navbar';
 
 class Landing extends React.Component {
   constructor() {
@@ -52,7 +53,7 @@ class Landing extends React.Component {
 
     const eVal = this.validateEmailFormat(this.state.email);
     const pVal = this.state.password.length >= 6 && this.state.password.length <= 20;
-    const cVal = this.state.confirmation.length === this.state.password;
+    const cVal = this.state.confirmation === this.state.password;
 
     this.setState({
       emailValid: eVal,
@@ -137,13 +138,14 @@ class Landing extends React.Component {
   }
 
   render() {
-    // if (this.props.isAuthenticated) {
-    //   return <Redirect to="/home" {...this.props} />
-    // }
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/home" {...this.props} />
+    }
 
     return (
       <div className="landing-component">
-        
+        <Navbar {...this.props}/>
+
         <div className="container">
         <div className="row">
 

@@ -24,6 +24,14 @@ const authenticationFunctions = {
         if (e) {
           res.status(401).json({ error: 'Failed to authenticate' })
         } else {
+          req.userInfo = decoded;
+          /*
+            req.userInfo = {
+              name,
+              id,
+              iat,
+            }
+          */
           next();
         }
       });

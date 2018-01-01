@@ -1,10 +1,11 @@
+const _ = require('underscore');
 const sequelize = require('../../database/index.js')
 
 module.exports = {
   polls: {
     get: (req, res, next) => {
       sequelize.models.poll.findAll({
-        where: {},
+        where: {userId: req.userInfo.id},
         include: [{all: true}]
       }).done((data) => {
         const pollData = [];
@@ -41,14 +42,14 @@ module.exports = {
         }
       }).then((user) => {
         sequelize.models.poll.create({
-          title: req.body.pollTitle,
-          description: req.body.pollDesc,
-          userId: user[0].dataValues.id
+          title: _.escape(req.body.pollTitle),
+          description: _.escape(req.body.pollDesc),
+          userId: req.userInfo.id,
         }).then((poll) => {
           link = poll.dataValues.id;
           for (let i = 0; i < req.body.choices.length; i++) {
             sequelize.models.choice.create({
-              text: req.body.choices[i],
+              text: _.escape(req.body.choices[i]),
               votes: 0,
               pollId: poll.dataValues.id
             });

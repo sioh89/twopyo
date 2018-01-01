@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'underscore';
 import {
   Link,
   Redirect,
@@ -72,12 +73,12 @@ class Vote extends React.Component {
         <div className="card main-vote-card">
 
           <div className="vote-banner">
-            <h1 className="card-title vote-card-title">{this.state.poll.pollTitle}</h1>
+            <h1 className="card-title vote-card-title">{_.unescape(this.state.poll.pollTitle)}</h1>
           </div>
 
           <div className="card-body">
 
-            <p className="card-subtitle mb-2 text-muted">{this.state.poll.pollDesc}</p>
+            <p className="card-subtitle mb-2 text-muted">{_.unescape(this.state.poll.pollDesc)}</p>
 
             <form>
               <ul className="list-group poll-choices"  onClick={this.selectItem.bind(this)}>
@@ -89,7 +90,7 @@ class Vote extends React.Component {
                       className="list-group-item list-group-item-action poll-choice-item"
                       onClick={this.selectItem}
                     >
-                      {choice.text}
+                      {_.unescape(choice.text)}
                     </li>
                   )
                 )}

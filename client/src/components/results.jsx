@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'underscore';
 import Navbar from './navbar.jsx';
 
 class Results extends React.Component {
@@ -43,12 +44,12 @@ class Results extends React.Component {
         <div className="card main-vote-card">
 
           <div className="vote-banner">
-            <h1 className="card-title vote-card-title">{this.state.poll.pollTitle}</h1>
+            <h1 className="card-title vote-card-title">{_.unescape(this.state.poll.pollTitle)}</h1>
           </div>
 
           <div className="card-body">
 
-            <p className="card-subtitle mb-2 text-muted">{this.state.poll.pollDesc}</p>
+            <p className="card-subtitle mb-2 text-muted">{_.unescape(this.state.poll.pollDesc)}</p>
 
             <form>
               <ul className="list-group poll-choices">
@@ -59,7 +60,7 @@ class Results extends React.Component {
                       className="list-group-item d-flex justify-content-between align-items-center poll-choice-item"
                       onClick={this.selectItem}
                     >
-                      {choice.text}
+                      {_.unescape(choice.text)}
                       <span className="badge badge-primary badge-pill">{choice.votes}</span>
                     </li>
                   )

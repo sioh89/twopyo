@@ -7,8 +7,8 @@ import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Navbar extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.logoutHandler = this.logoutHandler.bind(this);
   }
   
@@ -18,33 +18,62 @@ class Navbar extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-          <Link to="/" className="navbar-brand"><h1>Twopyo</h1></Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-        
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="nav navbar-nav">
-              <li className="nav-item">
-                <Link to="/home" className="nav-link">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/create" className="nav-link">Create</Link>
-              </li>
-            </ul>
+    if (!this.props.isAuthenticated) {
+      return (
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-fixed-top">
+  
+            <Link to="/home" className="navbar-brand"><h1>Twopyo</h1></Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+  
+              <ul className="nav navbar-nav navbar-right ml-md-auto">
+                <li className="nav-item">
+                  <Link to="/" className="nav-link" onClick={this.logoutHandler}>Login</Link>
+                </li>
+              </ul>
+            </div>
+  
+          </nav>
+        </div>
+      );
+    }
 
-            <ul className="nav navbar-nav navbar-right ml-md-auto">
-              <li className="nav-item">
-                <Link to="/" className="nav-link" onClick={this.logoutHandler}>Logout</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    );
+    if (this.props.isAuthenticated) {
+      return (
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-fixed-top">
+  
+            <Link to="/home" className="navbar-brand"><h1>Twopyo</h1></Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+  
+              <ul className="nav navbar-nav">
+                <li className="nav-item">
+                  <Link to="/home" className="nav-link">Home</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/create" className="nav-link">Create</Link>
+                </li>
+              </ul>
+  
+              <ul className="nav navbar-nav navbar-right ml-md-auto">
+                <li className="nav-item">
+                  <Link to="/" className="nav-link" onClick={this.logoutHandler}>Logout</Link>
+                </li>
+              </ul>
+            </div>
+  
+          </nav>
+        </div>
+      );
+    }
   }
 }
 

@@ -24,7 +24,6 @@ class Create extends React.Component {
     this.createPoll = this.createPoll.bind(this);
     this.addChoices = this.addChoices.bind(this);
     this.removeModal = this.removeModal.bind(this);
-    // this.formatFinalChoices = this.formatFinalChoices.bind(this);
   }
 
   titleChange(e) {
