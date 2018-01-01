@@ -1,10 +1,13 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const sequelize = require('../database/index.js');
 const bodyParser = require('body-parser');
 const router = require('./router.js');
 
 const app = express();
+
+// app.options('/polls', cors());
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import setAuthorizationToken from '../helpers/tokenHandler.js';
 
 class Landing extends React.Component {
@@ -136,6 +137,10 @@ class Landing extends React.Component {
   }
 
   render() {
+    // if (this.props.isAuthenticated) {
+    //   return <Redirect to="/home" {...this.props} />
+    // }
+
     return (
       <div className="landing-component">
         

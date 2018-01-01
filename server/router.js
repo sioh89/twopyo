@@ -1,8 +1,15 @@
 const path = require('path');
+const cors = require('cors');
 const router = require('express').Router();
 const endpoints = require('./controllers/endpoints.js');
 const userController = require('./controllers/userController.js');
 const authenticate = require('./middleware/authentication.js').authenticate;
+
+// CORS configuration
+const acceptableHeaders = ['Authorization'];
+const corsOptions = {
+  allowedHeaders: acceptableHeaders,
+};
 
 // Public endpoints
 router.post('/results', endpoints.results.post);

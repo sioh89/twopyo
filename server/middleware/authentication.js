@@ -10,8 +10,10 @@ const authenticationFunctions = {
     return token;
   },
   authenticate: function(req, res, next) {
-    const authorizationHeader = req.headers['Authorization'];
+    const authorizationHeader = req.get('Authorization');
     let token;
+
+    console.log('--------', authorizationHeader);
 
     if (authorizationHeader) {
       token = authorizationHeader.split(' ')[1];

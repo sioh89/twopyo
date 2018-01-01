@@ -38,7 +38,7 @@ class Results extends React.Component {
     
     return (
       <div className="vote-component">
-        <Navbar />
+        <Navbar {...this.props}/>
 
         <div className="card main-vote-card">
 

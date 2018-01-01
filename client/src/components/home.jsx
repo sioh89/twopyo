@@ -31,7 +31,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-component">
-        <Navbar />
+        <Navbar {...this.props}/>
         <div className="card main-home-card">
           <div className="to-create">
             <Link className="list-group-item list-group-item-action btn" to="/create"><h1>Create a poll</h1></Link>

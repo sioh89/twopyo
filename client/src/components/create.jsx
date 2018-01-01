@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Navbar from './navbar.jsx';
 
@@ -87,19 +88,15 @@ class Create extends React.Component {
     postObject.pollDesc = this.state.descValue;
     postObject.choices = this.state.finalChoices;
 
-    $.ajax({
-      url: 'http://localhost:3000/polls',
-      type: 'POST',
-      data: postObject,
-      success: (data) => {
-        console.log('success!', data);
+    axios.post('/polls', postObject)
+      .then((res) => {
+        console.log('success!', res);
         console.log('input data', postObject);
         this.setState({
-          created: data,
+          created: res.data,
         });
         this.removeModal();
-      }
-    });
+      })
   }
 
   render() {
@@ -109,7 +106,7 @@ class Create extends React.Component {
 
     return (
       <div className="create-component">
-        <Navbar />
+        <Navbar {...this.props}/>
         <div className="card main-create-card">
 
           <form  onSubmit={this.createPoll}>
