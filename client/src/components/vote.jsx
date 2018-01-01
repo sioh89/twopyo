@@ -4,7 +4,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import Navbar from './navbar.js';
+import Navbar from './navbar.jsx';
 
 class Vote extends React.Component {
   constructor(props) {

@@ -77,8 +77,7 @@ class Landing extends React.Component {
               console.log('RESPONSE: ', res);
 
               const token = res.data.accessToken;
-              localStorage.setItem('token', token);
-              setAuthorizationToken(token);
+              this.props.login(token);
               this.setState({
                 email: '',
                 password: '',
@@ -106,8 +105,7 @@ class Landing extends React.Component {
                 console.log('RESPONSE: ', res);
 
                 const token = res.data.accessToken;
-                localStorage.setItem('token', token);
-                setAuthorizationToken(token);
+                this.props.login(token);
                 this.setState({
                   email: '',
                   password: '',

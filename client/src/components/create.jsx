@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
-import Navbar from './navbar.js';
+import Navbar from './navbar.jsx';
 
 class Create extends React.Component {
   constructor(props) {

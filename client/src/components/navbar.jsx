@@ -9,12 +9,10 @@ class Navbar extends React.Component {
 
   constructor() {
     super();
-    this.logout = this.logout.bind(this);
   }
   
-  logout() {
-    localStorage.removeItem('token');
-    setAuthorizationToken(false);
+  logoutHandler() {
+    this.props.logout();
     this.props.history.push('/');
   }
 
@@ -39,7 +37,7 @@ class Navbar extends React.Component {
 
             <ul className="nav navbar-nav navbar-right ml-md-auto">
               <li className="nav-item">
-                <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
+                <Link to="/" className="nav-link" onClick={this.logoutHandler}>Logout</Link>
               </li>
             </ul>
           </div>

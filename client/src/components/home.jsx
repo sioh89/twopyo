@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import PollsList from './pollList.jsx';
 import Create from './create.jsx';
-import Navbar from './navbar.js';
+import Navbar from './navbar.jsx';
 
 class Home extends React.Component {
 

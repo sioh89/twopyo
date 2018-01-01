@@ -15,6 +15,7 @@ import Vote from './components/vote.jsx';
 import Home from './components/home.jsx';
 import Landing from './components/landing.jsx';
 import setAuthorizationToken from './helpers/tokenHandler.js';
+import Auth from './helpers/isAuthenticated.jsx';
 import './styles.css';
 
 if (localStorage.token) {
@@ -22,55 +23,38 @@ if (localStorage.token) {
 }
 
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
+
+    // check if logged in
+    const token = localStorage.getItem('token');
+    let loggedIn = false;
+    if (token) {
+      loggedIn = true;
+    }
+
     this.state = {
-      polls: [],
-      currentPage: '/index' ,
-      currentResultsData: {}
+      isAuthenticated: loggedIn,
     };
-    this.goToCreatePage = this.goToCreatePage.bind(this);
-    this.goToIndex = this.goToIndex.bind(this);
-    this.goToResults = this.goToResults.bind(this);
-    this.goToVote = this.goToVote.bind(this);
+    this.logout = this.logout.bind(this);
+    this.login = this.login.bind(this);
   }
 
-
-
-  goToIndex() {
-    // this.setState({
-    //   currentPage: '/index'
-    // });
-    $.ajax({
-      url: 'http://localhost:3000/polls',
-      type: 'GET',
-      success: (data) => {
-        console.log('****(*&', data);
-        this.setState({
-          polls: data,
-          currentPage: '/index'
-        });
-      }
-    });
-  }
-
-  goToCreatePage() {
+  login(token) {
+    localStorage.setItem('token', token);
+    setAuthorizationToken(token);
     this.setState({
-      currentPage: '/create'
-    });
-  }
-
-  goToResults(data) {
-    this.setState({
-      currentPage: '/results',
-      currentResultsData: data
-    });
-  }
-  
-  goToVote() {
-    this.setState({
-      currentPage: '/vote'
+      isAuthenticated: true,
     })
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    setAuthorizationToken(false);
+    this.setState({
+      isAuthenticated: false,
+    });
   }
 
   render() {
@@ -79,11 +63,11 @@ class App extends React.Component {
         <Router>
           <div>            
             <Switch>
-              <Route exact path="/" component={Landing}/>
-              <Route path="/home" component={Home}/>
-              <Route path="/create" component={Create}/>
-              <Route path="/results/:id" component={Results}/>
-              <Route path="/:id" component={Vote}/>
+              <Route exact path="/" render={(props) => <Landing {...props}            isAuthenticated={this.state.isAuthenticated} logout={this.logout} login={this.login}/>} />
+              <Route path="/home" render={(props) => <Auth {...props} comp={Home}     isAuthenticated={this.state.isAuthenticated} logout={this.logout} />} />
+              <Route path="/create" render={(props) => <Auth {...props} comp={Create} isAuthenticated={this.state.isAuthenticated} logout={this.logout} />} />
+              <Route path="/results/:id" render={(props) => <Results {...props}       isAuthenticated={this.state.isAuthenticated} logout={this.logout} />} />
+              <Route path="/:id" render={(props) => <Vote {...props}                  isAuthenticated={this.state.isAuthenticated} logout={this.logout} />} />
             </Switch>
           </div>
         </Router>

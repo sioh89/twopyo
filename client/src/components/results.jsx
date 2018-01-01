@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Navbar from './navbar.js';
+import Navbar from './navbar.jsx';
 
 class Results extends React.Component {
 
