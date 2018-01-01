@@ -61,6 +61,10 @@ h1 {
   background-color: #465C8B;  
 }
 
+.landing-container {
+  margin-top: 80px;
+}
+
 .list-group-item,
 .list-group-item:first-child,
 .list-group-item:last-child {
@@ -376,9 +380,34 @@ h1 {
 }
 
 .login-signup-change {
-  color: #DFDCE3;
+  color: #dfdce385;
 }
 
 .input-error {
   border: 1px solid red !important;
+}
+
+.navbar {
+  background: linear-gradient(to right, #465C8B, #93c178);
+}
+
+.navbar h1 {
+  color: #DFDCE3;
+  font-weight: 800;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #DFDCE3;
+}
+
+#log-text {
+  color: #4c4a50 !important; 
+}
+
+#log-text:hover {
+  color: #DFDCE3 !important;
+}
+
+.input-label {
+  color: #DFDCE3;
 }

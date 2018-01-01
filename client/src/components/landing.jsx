@@ -146,7 +146,7 @@ class Landing extends React.Component {
       <div className="landing-component">
         <Navbar {...this.props}/>
 
-        <div className="container">
+        <div className="container landing-container">
         <div className="row">
 
 
@@ -180,13 +180,13 @@ class Landing extends React.Component {
 
           <form className="landing-login-form">
             <div className="form-group email-form-group">
-              <label for="inputEmail">Email address</label>
+              <label className="input-label" for="inputEmail">Email address</label>
               <input type="email" value={this.state.email} className={`form-control landing-card-login-input${this.state.emailValid ? '' : ' input-error'}`} id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleEmailChange}/>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div className="form-group password-form-group row">
               <div className="col-md">
-                <label for="inputPassword">Password</label>
+                <label className="input-label" for="inputPassword">Password</label>
                 <input type="password" value={this.state.password} className={`form-control landing-card-login-input${this.state.passwordValid ? '' : ' input-error'}`} id="inputPassword" aria-describedby="passwordHelp" placeholder="Password" onChange={this.handlePasswordChange}/>
                 <small id="passwordHelp" className="form-text text-muted" style={{visibility: this.state.loginState === 'Sign Up' ? 'visible' : 'hidden'}}>Your password must be 6-20 characters</small>
               </div>

@@ -32,7 +32,7 @@ class Navbar extends React.Component {
   
               <ul className="nav navbar-nav navbar-right ml-md-auto">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link" onClick={this.logoutHandler}>Login</Link>
+                  <Link to="/" className="nav-link" id="log-text" onClick={this.logoutHandler}>Login</Link>
                 </li>
               </ul>
             </div>
@@ -56,16 +56,16 @@ class Navbar extends React.Component {
   
               <ul className="nav navbar-nav">
                 <li className="nav-item">
-                  <Link to="/home" className="nav-link">Home</Link>
+                  <Link to="/home" className="nav-link nav-link-on-left">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/create" className="nav-link">Create</Link>
+                  <Link to="/create" className="nav-link nav-link-on-left">Create</Link>
                 </li>
               </ul>
   
               <ul className="nav navbar-nav navbar-right ml-md-auto">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link" onClick={this.logoutHandler}>Logout</Link>
+                  <Link to="/" className="nav-link" id="log-text" onClick={this.logoutHandler}>Logout</Link>
                 </li>
               </ul>
             </div>
