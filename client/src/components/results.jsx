@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import _ from 'underscore';
 import Navbar from './navbar.jsx';
+import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Results extends React.Component {
 
@@ -15,6 +16,7 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
+    setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/results', { pollId: this.state.pollId })
       .then(res => {
         console.log(res);
@@ -23,10 +25,14 @@ class Results extends React.Component {
         });
       })
       .catch(error => {
+        console.log('error creat`e', e.response);
+        if (e.response.status === 401) {
+          this.props.logout();
+        }
         this.setState({
           poll: 'ERROR'
         });
-      })
+      });
   }
 
   render() {

@@ -3,6 +3,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Navbar from './navbar.jsx';
+import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Create extends React.Component {
   constructor(props) {
@@ -27,10 +28,10 @@ class Create extends React.Component {
   }
 
   titleChange(e) {
-    let temp = /\S/.test(this.state.titleValue)
+    let temp = e.target.value.trim() !== '';
     this.setState({
       titleValue: e.target.value,
-      titleBoolean: temp
+      titleBoolean: temp,
     });
   }
 
@@ -87,6 +88,7 @@ class Create extends React.Component {
     postObject.pollDesc = this.state.descValue;
     postObject.choices = this.state.finalChoices;
 
+    setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/polls', postObject)
       .then((res) => {
         console.log('success!', res);
@@ -95,6 +97,14 @@ class Create extends React.Component {
           created: res.data,
         });
         this.removeModal();
+      })
+      .catch((e) => {
+        console.log('error creat`e', e.response);
+        if (e.response.status === 401) {
+          console.log('logging out');
+          $(".modal-backdrop.fade.show").remove();          
+          this.props.logout();
+        }
       })
   }
 

@@ -405,9 +405,30 @@ h1 {
 }
 
 #log-text:hover {
-  color: #DFDCE3 !important;
+  color: #4c4a50 !important; 
+  font-weight: 400;  
 }
 
 .input-label {
   color: #DFDCE3;
 }
+
+.navbar-collapse.collapse.show {
+  text-align: center;
+  text-shadow: 1px 1px #a7a7a7;
+} 
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color: #DFDCE3;
+  font-weight: 400;
+}
+
+/* #create-nav-link:hover {
+  color: #DFDCE3 !important;
+  font-weight: 400;
+}
+
+#home-nav-link:hover {
+  color: #DFDCE3 !important;
+  font-weight: 400;
+} */

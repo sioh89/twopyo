@@ -64,6 +64,8 @@ class Landing extends React.Component {
             && this.state.emailValid
             && this.state.passwordValid
             && this.state.confirmationValid) {
+          
+          setAuthorization(localStorage.getItem('token'));
           axios.post('/createUser', {
             name: this.state.email,
             password: this.state.password,
@@ -87,12 +89,20 @@ class Landing extends React.Component {
               });
               this.props.history.push('/home');         
             }
+          })
+          .catch((e) => {
+            console.log('error creat`e', e.response);
+            if (e.response.status === 401) {
+              this.props.logout();
+            }
           });
         }
 
         if (this.state.loginState === 'Login'
             && this.state.emailValid
             && this.state.passwordValid) {
+
+          setAuthorizationToken(localStorage.getItem('token'));
           axios.post('/authUser', {
             name: this.state.email,
             password: this.state.password,
@@ -114,6 +124,12 @@ class Landing extends React.Component {
                   confirmation: '',
                 });
                 this.props.history.push('/home'); 
+              }
+            })
+            .catch((e) => {
+              console.log('error creat`e', e.response);
+              if (e.response.status === 401) {
+                this.props.logout();
               }
             });
         }

@@ -56,10 +56,10 @@ class Navbar extends React.Component {
   
               <ul className="nav navbar-nav">
                 <li className="nav-item">
-                  <Link to="/home" className="nav-link nav-link-on-left">Home</Link>
+                  <Link to="/home" id="home-nav-link" className="nav-link nav-link-on-left">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/create" className="nav-link nav-link-on-left">Create</Link>
+                  <Link to="/create" id="create-nav-link" className="nav-link nav-link-on-left">Create</Link>
                 </li>
               </ul>
   

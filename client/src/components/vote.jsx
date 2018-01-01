@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Navbar from './navbar.jsx';
+import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Vote extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Vote extends React.Component {
   }
 
   registerVote() {
+    setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/castVote', {
       pollId: this.state.pollId,
       choiceNumber: this.state.selected,
@@ -40,17 +42,27 @@ class Vote extends React.Component {
           voted: true,
         });
       })
-      .catch(err => {
-        console.log('cast vote err', err);
-      })
+      .catch((e) => {
+        console.log('error creat`e', e.response);
+        if (e.response.status === 401) {
+          this.props.logout();
+        }
+      });
   }
 
   componentDidMount() {
+    setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/pollById', {pollId: this.state.pollId})
       .then(res => {
         this.setState({
           poll: res.data,
         })
+      })
+      .catch((e) => {
+        console.log('error creat`e', e.response);
+        if (e.response.status === 401) {
+          this.props.logout();
+        }
       })
   }
 

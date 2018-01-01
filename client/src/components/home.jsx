@@ -8,6 +8,7 @@ import axios from 'axios';
 import PollsList from './pollList.jsx';
 import Create from './create.jsx';
 import Navbar from './navbar.jsx';
+import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Home extends React.Component {
 
@@ -19,12 +20,19 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    setAuthorizationToken(localStorage.getItem('token'));
     axios.get('/polls')
       .then(response => {
         this.setState({
           polls: response.data,
         })
         console.log(this.state.polls);
+      })
+      .catch((e) => {
+        console.log('error creat`e', e.response);
+        if (e.response.status === 401) {
+          this.props.logout();
+        }
       });
   }
 
