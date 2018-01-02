@@ -16,7 +16,7 @@ let PollList = function(props) {
           (
             <Link className="list-group-item list-group-item-action poll-item" key={`pl-${index}`} to={{pathname: `/results/${poll.pollId}`}}>
               <div className="poll-list-item-title">{poll.pollTitle}</div>
-              <div className="poll-list-item-id">{poll.pollId}</div>
+              <div className="poll-list-item-id">{poll.pollLink}</div>
             </Link>
           )
         )}

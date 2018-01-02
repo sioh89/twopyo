@@ -10,14 +10,14 @@ class Results extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      pollId: props.match.params.id,
+      pollLink: props.match.params.id,
       poll: {},
     }
   }
 
   componentDidMount() {
     setAuthorizationToken(localStorage.getItem('token'));
-    axios.post('/results', { pollId: this.state.pollId })
+    axios.post('/results', { pollLink: this.state.pollLink })
       .then(res => {
         console.log(res);
         this.setState({

@@ -15,6 +15,10 @@ module.exports = {
           }
         })
           .done((data) => {
+            if (!data) {
+              return res.status(204).send('User not authenticated');
+            }
+            
             bcrypt.compare(req.body.password, data.dataValues.password, (e, valid) => {
               if (valid) {
                 const token = authFuncs.generateToken({

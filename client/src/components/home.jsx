@@ -8,7 +8,7 @@ import axios from 'axios';
 import PollsList from './pollList.jsx';
 import Create from './create.jsx';
 import Navbar from './navbar.jsx';
-import setAuthorizationToken from '../helpers/tokenHandler.js'
+import setAuthorizationToken from '../helpers/tokenHandler.js';
 
 class Home extends React.Component {
 

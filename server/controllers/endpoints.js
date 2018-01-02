@@ -1,5 +1,25 @@
 const _ = require('underscore');
 const sequelize = require('../../database/index.js')
+const randomWords = require('random-words');
+
+const getUniqueLink = function(callback) {
+  const tempLink = randomWords({
+    min: 1,
+    max: 3,
+    join: '-',
+  });
+
+  sequelize.models.poll.findOne({
+    where: {link: tempLink}
+  })
+  .then(found => {
+    if (found) {
+      getUniqueLink(callback);
+    } else {
+      callback(tempLink);
+    }
+  });
+};
 
 module.exports = {
   polls: {
@@ -16,6 +36,7 @@ module.exports = {
           tempPollData.pollTitle = info.title;
           tempPollData.pollDesc = info.description;
           tempPollData.pollId = info.id;
+          tempPollData.pollLink = info.link;
           tempPollData.choices = [];
           
           for (let j = 0; j < info.choices.length; j++) {
@@ -34,17 +55,18 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-      let link;
       
-      sequelize.models.user.findOrCreate({
-        where: {
-          name: req.body.owner
-        }
-      }).then((user) => {
+      getUniqueLink((uniqueLink) => {
+        console.log('@@@@@@@@')
+        console.log('title: ', req.body.pollTitle);
+        console.log('description: ', req.body.pollDesc);
+        console.log('userId: ', req.userInfo.id);
+        console.log('link: ', uniqueLink);
         sequelize.models.poll.create({
           title: _.escape(req.body.pollTitle),
           description: _.escape(req.body.pollDesc),
           userId: req.userInfo.id,
+          link: uniqueLink,
         }).then((poll) => {
           link = poll.dataValues.id;
           for (let i = 0; i < req.body.choices.length; i++) {
@@ -55,8 +77,8 @@ module.exports = {
             });
           }
         }).done(() => {
-          console.log('-------', link);
-          res.json(link);
+          console.log('-------', uniqueLink);
+          res.json(uniqueLink);
         });
       });
     }
@@ -65,10 +87,10 @@ module.exports = {
   results: {
 
     post: (req, res, next) => {
-      let pollId = req.body.pollId;
+      let pollLink = req.body.pollLink;
       sequelize.models.poll.find({
         where : {
-          id: pollId
+          link: pollLink
         },
         include: [{all: true}]
       }).then(poll => {
@@ -76,6 +98,7 @@ module.exports = {
         returnObj.pollTitle = poll.dataValues.title;
         returnObj.pollDesc = poll.dataValues.description;
         returnObj.pollId = poll.dataValues.id;
+        returnObj.pollLink = poll.dataValues.link;
         returnObj.owner = poll.dataValues.user.dataValues.name;
         returnObj.choices = [];
     
@@ -103,7 +126,6 @@ module.exports = {
       console.log('*&(*&text', req.body.choiceNumber);
       sequelize.models.choice.increment('votes', {
         where: {
-          pollId: req.body.pollId,
           id: req.body.choiceNumber
         }
       }).then(() => {
@@ -115,10 +137,10 @@ module.exports = {
 
   pollById: {
     post: (req, res, next) => {
-      let pollId = req.body.pollId;
+      let pollLink = req.body.pollLink;
       
         sequelize.models.poll.find({
-          where: {id: pollId},
+          where: {link: pollLink},
           include: [{all:true}]
         }).then(poll => {
           if (poll) {
@@ -126,6 +148,7 @@ module.exports = {
             returnObj.pollTitle = poll.dataValues.title;
             returnObj.pollDesc = poll.dataValues.description;
             returnObj.pollId = poll.dataValues.id;
+            returnObj.pollLink = poll.dataValues.link;
             returnObj.owner = poll.dataValues.user.dataValues.name;
             returnObj.choices = [];
       

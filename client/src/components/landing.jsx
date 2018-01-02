@@ -9,6 +9,7 @@ class Landing extends React.Component {
     super();
     this.state = {
       loginState: 'Login',
+      otherState: 'Sign Up',
       email: '',
       password: '',
       confirmation: '',
@@ -28,6 +29,7 @@ class Landing extends React.Component {
     if (this.state.loginState === 'Login') {
       this.setState({
         loginState: 'Sign Up',
+        otherState: 'Login',
         password: '',
         confirmation: '',
         emailValid: true,
@@ -39,6 +41,7 @@ class Landing extends React.Component {
     if (this.state.loginState === 'Sign Up') {
       this.setState({
         loginState: 'Login',
+        otherState: 'Sign Up',
         password: '',
         confirmation: '',
         emailValid: true,
@@ -65,7 +68,7 @@ class Landing extends React.Component {
             && this.state.passwordValid
             && this.state.confirmationValid) {
           
-          setAuthorization(localStorage.getItem('token'));
+          setAuthorizationToken(localStorage.getItem('token'));
           axios.post('/createUser', {
             name: this.state.email,
             password: this.state.password,
@@ -214,7 +217,7 @@ class Landing extends React.Component {
             </div>
 
             <div className="login-btn-container">
-                <span className="login-signup-change" onClick={this.toggleLogin}>{'Click here to go to ' + this.state.loginState}</span>
+                <span className="login-signup-change" onClick={this.toggleLogin}>{'Click here to go to ' + this.state.otherState}</span>
                 <button type="submit" className="btn btn-outline-primary landing-login-card-btn" onClick={this.handleLogin}>{this.state.loginState}</button>
             </div>
 

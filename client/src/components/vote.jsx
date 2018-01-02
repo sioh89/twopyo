@@ -12,7 +12,7 @@ class Vote extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pollId: this.props.match.params.id,
+      pollLink: this.props.match.params.id,
       poll: {},
       selected: -1,
       voted: false,
@@ -33,7 +33,6 @@ class Vote extends React.Component {
   registerVote() {
     setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/castVote', {
-      pollId: this.state.pollId,
       choiceNumber: this.state.selected,
     })
       .then(res => {
@@ -52,7 +51,7 @@ class Vote extends React.Component {
 
   componentDidMount() {
     setAuthorizationToken(localStorage.getItem('token'));
-    axios.post('/pollById', {pollId: this.state.pollId})
+    axios.post('/pollById', {pollLink: this.state.pollLink})
       .then(res => {
         this.setState({
           poll: res.data,
@@ -67,7 +66,7 @@ class Vote extends React.Component {
   }
 
   render() {
-    if (!this.state.poll.pollId)
+    if (!this.state.poll.pollLink)
       return (
         <div onLoad={this.removeModal}>
           COULD NOT FIND POLL
@@ -75,7 +74,7 @@ class Vote extends React.Component {
       );
 
     if (this.state.voted) {
-      return <Redirect to={`/results/${this.state.pollId}`} />;
+      return <Redirect to={`/results/${this.state.pollLink}`} />;
     }
 
     return (
@@ -118,7 +117,7 @@ class Vote extends React.Component {
             >
               Vote
             </button>
-            <Link to={`/results/${this.state.pollId}`}><p id="result-link-text">Go to results</p></Link>
+            <Link to={`/results/${this.state.pollLink}`}><p id="result-link-text">Go to results</p></Link>
           </div>
         </div>
 

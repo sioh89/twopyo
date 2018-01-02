@@ -23,7 +23,7 @@ const User = sequelize.define('user', {
 const Poll = sequelize.define('poll', {
   title: Sequelize.STRING(50),
   description: Sequelize.STRING(160),
-  link: Sequelize.STRING(5)
+  link: Sequelize.STRING(150)
 });
 
 const Choice = sequelize.define('choice', {

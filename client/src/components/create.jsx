@@ -94,8 +94,16 @@ class Create extends React.Component {
         console.log('success!', res);
         console.log('input data', postObject);
         this.setState({
-          created: res.data,
+          titleValue: '',
+          descValue: '',
+          choicesValues: ['', '', '', ''],
+          finalChoices: [],
+          choicesBoolean: false,
+          titleBoolean: false,
+          addChoicesBoolean: true,
+          created: '',
         });
+        this.props.history.push(`/results/${res.data}`);
         this.removeModal();
       })
       .catch((e) => {
@@ -109,9 +117,9 @@ class Create extends React.Component {
   }
 
   render() {
-    if (this.state.created !== '') {
-      return <Redirect to={`/results/${this.state.created}`} />;
-    }
+    // if (this.state.created !== '') {
+    //   return <Redirect to={`/results/${this.state.created}`} />;
+    // }
 
     return (
       <div className="create-component">
