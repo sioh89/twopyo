@@ -44,6 +44,9 @@ class Home extends React.Component {
           <div className="to-create">
             <Link className="list-group-item list-group-item-action btn" to="/create"><h1>Create a poll</h1></Link>
           </div>
+          <div className="results-label">
+            Your poll results
+          </div>
           <div className="polls-list">
             <PollsList polls={this.state.polls} />
           </div>

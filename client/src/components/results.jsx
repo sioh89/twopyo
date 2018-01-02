@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import _ from 'underscore';
 import Navbar from './navbar.jsx';
+import Share from './share.jsx';
 import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Results extends React.Component {
@@ -63,7 +64,7 @@ class Results extends React.Component {
                   (
                     <li
                       key={`rl-${index}`}
-                      className="list-group-item d-flex justify-content-between align-items-center poll-choice-item"
+                      className="list-group-item d-flex justify-content-between align-items-center poll-results-item"
                       onClick={this.selectItem}
                     >
                       {_.unescape(choice.text)}
@@ -77,6 +78,7 @@ class Results extends React.Component {
           </div>
 
         </div>
+        <Share />
       </div>
     );
   }

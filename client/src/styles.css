@@ -1,3 +1,9 @@
+body {
+  background-color: #dfdce3;
+  background: url("./escheresque.png");
+  background-repeat: repeat;
+}
+
 h1, h2, h3, h4, h5, h6, p, span, div {
   font-family: 'Montserrat', sans-serif;
   font-weight: 200;
@@ -47,6 +53,12 @@ h1 {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 100px;  
+}
+
+.share-container {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 0px;  
 }
 
 .landing-vote-card {
@@ -278,7 +290,7 @@ h1 {
 }
 
 .badge-primary {
-  color: #fdfdfd;
+  color: #36353a;
   background-color: #93c178;
 }
 
@@ -423,12 +435,33 @@ h1 {
   font-weight: 400;
 }
 
-/* #create-nav-link:hover {
-  color: #DFDCE3 !important;
-  font-weight: 400;
+#copyLabel {
+  background-color: #f7ee6a;
+  border-radius: 0px;
+  border: 1px solid #858e95;
 }
 
-#home-nav-link:hover {
-  color: #DFDCE3 !important;
-  font-weight: 400;
-} */
+#copyText {
+  border: 1px solid #858e95;
+  color: #969494;
+}
+
+#copyButton {
+  border-radius: 0;
+  background-color: #dfdce3;
+  color: #465b8a;
+}
+
+.results-label {
+  background-color: #485e895e;
+}
+
+.list-group-item:focus, .list-group-item:hover {
+  z-index: 1;
+  text-decoration: none;
+  background-color: #f7ee6a1f;
+}
+
+.poll-results-item:hover {
+  background-color: #ffffff;
+}

@@ -14,9 +14,9 @@ let PollList = function(props) {
       <div className="list-group">
         {props.polls.map((poll, index) => 
           (
-            <Link className="list-group-item list-group-item-action poll-item" key={`pl-${index}`} to={{pathname: `/results/${poll.pollId}`}}>
+            <Link className="list-group-item list-group-item-action poll-item" key={`pl-${index}`} to={{pathname: `/results/${poll.pollLink}`}}>
               <div className="poll-list-item-title">{poll.pollTitle}</div>
-              <div className="poll-list-item-id">{poll.pollLink}</div>
+              <div className="poll-list-item-id">/{poll.pollLink}</div>
             </Link>
           )
         )}

@@ -16,6 +16,7 @@ class Landing extends React.Component {
       emailValid: true,
       passwordValid: true,
       confirmationValid: true,
+      goLink: '',
     }
     this.toggleLogin = this.toggleLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -23,6 +24,8 @@ class Landing extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleConfirmationChange = this.handleConfirmationChange.bind(this);
     this.validateEmailFormat = this.validateEmailFormat.bind(this);
+    this.goLinkChangeHandler = this.goLinkChangeHandler.bind(this);
+    this.go = this.go.bind(this);
   }
 
   toggleLogin() {
@@ -49,6 +52,10 @@ class Landing extends React.Component {
         confirmationValid: true,
       });
     }
+  }
+
+  go() {
+    this.props.history.push(`/${this.state.goLink}`);
   }
 
   handleLogin(e) {
@@ -140,6 +147,10 @@ class Landing extends React.Component {
     );
   }
 
+  goLinkChangeHandler(e) {
+    this.setState({goLink: e.target.value});
+  }
+
   handleEmailChange(e) {
     this.setState({ email: e.target.value});
   }
@@ -182,9 +193,11 @@ class Landing extends React.Component {
                 placeholder="Poll ID"
                 aria-label="poll-id"
                 aria-describedby="voteIdHelp"
+                value={this.state.goLink}
+                onChange={this.goLinkChangeHandler}
               />
               <div className="input-group-append">
-                <button className="btn btn-outline-primary landing-vote-card-btn" type="button">Go!</button>
+                <button className="btn btn-outline-primary landing-vote-card-btn" type="button" onClick={this.go}>Go!</button>
               </div>
             </div>
             <small id="voteIdHelp" className="form-text text-muted vote-id-help">Enter the poll ID that was shared with you.</small>

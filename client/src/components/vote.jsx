@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Navbar from './navbar.jsx';
+import Share from './share.jsx';
 import setAuthorizationToken from '../helpers/tokenHandler.js'
 
 class Vote extends React.Component {
@@ -121,6 +122,7 @@ class Vote extends React.Component {
           </div>
         </div>
 
+        <Share />
       </div>
     );
   }
