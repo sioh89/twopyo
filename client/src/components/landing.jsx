@@ -83,9 +83,10 @@ class Landing extends React.Component {
           .then((res) => {
             if (res.status === 204) {
               console.log('204: user already exists');
-              //~~~~ERROR HANDLING~~~~//
+              document.getElementById('errorPlaceholder').innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Email already used<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
             } else if (res.status === 400) {
               console.log('400: error in sign up. try again');
+              document.getElementById('errorPlaceholder').innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Error occurred. Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';              
             } else {
               //~~~SUCCESS~~~//
               console.log('RESPONSE: ', res);
@@ -120,8 +121,10 @@ class Landing extends React.Component {
             .then(res => {
               if (res.status === 204) {
                 console.log('204: user not authenticated')
+                document.getElementById('errorPlaceholder').innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect credentials.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';                
               } else if (res.status === 400) {
                 console.log('400: error in authentication. try again');
+                document.getElementById('errorPlaceholder').innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Error occurred. Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';                
               } else {
                 //~~~SUCCESS~~~//
                 console.log('RESPONSE: ', res);
@@ -209,6 +212,8 @@ class Landing extends React.Component {
           <div className="blue-banner">
             <p className="blue-banner-text">{this.state.loginState}</p>
           </div>
+
+          <div id="errorPlaceholder"></div>
 
           <form className="landing-login-form">
             <div className="form-group email-form-group">
