@@ -11,12 +11,6 @@ const corsOptions = {
   allowedHeaders: acceptableHeaders,
 };
 
-router.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
-
 // Public endpoints
 router.post('/results', endpoints.results.post);
 router.post('/castVote', endpoints.castVote.post);
