@@ -50,7 +50,7 @@ class App extends React.Component {
   }
 
   logout() {
-    console.log('Logout called!');
+    // console.log('Logout called!');
     localStorage.removeItem('token');
     setAuthorizationToken(false);
     this.setState({

@@ -9,7 +9,7 @@ sequelize
   .authenticate()
   .then(() => {
     if (error) throw error;
-    console.log('Connection successfully established');
+    // console.log('Connection successfully established');
   })
   .catch(error => {
     console.error('Error occurred during connection', error);

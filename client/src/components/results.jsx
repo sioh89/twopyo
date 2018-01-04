@@ -9,7 +9,7 @@ class Results extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.state = {
       pollLink: props.match.params.id,
       poll: {},
@@ -20,13 +20,13 @@ class Results extends React.Component {
     setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/results', { pollLink: this.state.pollLink })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           poll: res.data,
         });
       })
       .catch(error => {
-        console.log('error creat`e', e.response);
+        // console.log('error creat`e', e.response);
         if (e.response.status === 401) {
           this.props.logout();
         }

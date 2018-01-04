@@ -13,7 +13,7 @@ const authenticationFunctions = {
     const authorizationHeader = req.get('Authorization');
     let token;
 
-    console.log('--------', authorizationHeader);
+    // console.log('--------', authorizationHeader);
 
     if (authorizationHeader) {
       token = authorizationHeader.split(' ')[1];
