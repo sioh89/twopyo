@@ -9,6 +9,12 @@ const app = express();
 
 // app.options('/polls', cors());
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

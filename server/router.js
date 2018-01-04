@@ -11,6 +11,13 @@ const corsOptions = {
   allowedHeaders: acceptableHeaders,
 };
 
+// Serve compressed files
+router.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 // Public endpoints
 router.post('/results', endpoints.results.post);
 router.post('/castVote', endpoints.castVote.post);
@@ -23,6 +30,7 @@ router.get('/polls', authenticate, endpoints.polls.get);
 router.post('/polls', authenticate, endpoints.polls.post);
 
 // Catch all
+
 router.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../client/dist/', 'index.html')));
 
 module.exports = router;
