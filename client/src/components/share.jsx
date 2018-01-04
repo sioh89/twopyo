@@ -5,7 +5,7 @@ class Share extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.log(typeof window.location.href);
+    console.log(typeof window.location.href);
     let tempLink = window.location.href;
     const ind = tempLink.indexOf('/results/');
     let adjustedLink = '';

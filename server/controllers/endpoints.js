@@ -57,11 +57,11 @@ module.exports = {
     post: (req, res, next) => {
       
       getUniqueLink((uniqueLink) => {
-        // console.log('@@@@@@@@')
-        // console.log('title: ', req.body.pollTitle);
-        // console.log('description: ', req.body.pollDesc);
-        // console.log('userId: ', req.userInfo.id);
-        // console.log('link: ', uniqueLink);
+        console.log('@@@@@@@@')
+        console.log('title: ', req.body.pollTitle);
+        console.log('description: ', req.body.pollDesc);
+        console.log('userId: ', req.userInfo.id);
+        console.log('link: ', uniqueLink);
         sequelize.models.poll.create({
           title: _.escape(req.body.pollTitle),
           description: _.escape(req.body.pollDesc),
@@ -77,7 +77,7 @@ module.exports = {
             });
           }
         }).done(() => {
-          // console.log('-------', uniqueLink);
+          console.log('-------', uniqueLink);
           res.json(uniqueLink);
         });
       });
@@ -122,14 +122,14 @@ module.exports = {
 
   castVote: {
     post: (req, res, next) => {
-      // console.log('&&&pollID', req.body.pollId);
-      // console.log('*&(*&text', req.body.choiceNumber);
+      console.log('&&&pollID', req.body.pollId);
+      console.log('*&(*&text', req.body.choiceNumber);
       sequelize.models.choice.increment('votes', {
         where: {
           id: req.body.choiceNumber
         }
       }).then(() => {
-        // console.log('********INCREMEMNTED');
+        console.log('********INCREMEMNTED');
         res.send('Vote counted!');
       });
     }

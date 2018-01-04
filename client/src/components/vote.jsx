@@ -37,13 +37,13 @@ class Vote extends React.Component {
       choiceNumber: this.state.selected,
     })
       .then(res => {
-        // console.log('cast vote', res)
+        console.log('cast vote', res)
         this.setState({
           voted: true,
         });
       })
       .catch((e) => {
-        // console.log('error creat`e', e.response);
+        console.log('error creat`e', e.response);
         if (e.response.status === 401) {
           this.props.logout();
         }
@@ -59,7 +59,7 @@ class Vote extends React.Component {
         })
       })
       .catch((e) => {
-        // console.log('error creat`e', e.response);
+        console.log('error creat`e', e.response);
         if (e.response.status === 401) {
           this.props.logout();
         }

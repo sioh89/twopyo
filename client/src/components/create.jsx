@@ -81,7 +81,7 @@ class Create extends React.Component {
   createPoll(e) {
     e.preventDefault();
 
-    // console.log('---finalChoices: ', this.state.finalChoices);
+    console.log('---finalChoices: ', this.state.finalChoices);
     let postObject = {};
     postObject.owner = 'admin';
     postObject.pollTitle = this.state.titleValue;
@@ -91,8 +91,8 @@ class Create extends React.Component {
     setAuthorizationToken(localStorage.getItem('token'));
     axios.post('/polls', postObject)
       .then((res) => {
-        // console.log('success!', res);
-        // console.log('input data', postObject);
+        console.log('success!', res);
+        console.log('input data', postObject);
         this.setState({
           titleValue: '',
           descValue: '',
@@ -107,9 +107,9 @@ class Create extends React.Component {
         this.removeModal();
       })
       .catch((e) => {
-        // console.log('error creat`e', e.response);
+        console.log('error creat`e', e.response);
         if (e.response.status === 401) {
-          // console.log('logging out');
+          console.log('logging out');
           $(".modal-backdrop.fade.show").remove();          
           this.props.logout();
         }

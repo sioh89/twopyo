@@ -82,14 +82,13 @@ class Landing extends React.Component {
           })
           .then((res) => {
             if (res.status === 204) {
-              // console.log('204: user already exists');
-              $('#errorPlaceholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">User already exists<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+              console.log('204: user already exists');
+              //~~~~ERROR HANDLING~~~~//
             } else if (res.status === 400) {
-              // console.log('400: error in sign up. try again');
-              $('#errorPlaceholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Error during sign up. Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');              
+              console.log('400: error in sign up. try again');
             } else {
               //~~~SUCCESS~~~//
-              // console.log('RESPONSE: ', res);
+              console.log('RESPONSE: ', res);
 
               const token = res.data.accessToken;
               this.props.login(token);
@@ -102,7 +101,7 @@ class Landing extends React.Component {
             }
           })
           .catch((e) => {
-            // console.log('error create', e.response);
+            console.log('error creat`e', e.response);
             if (e.response.status === 401) {
               this.props.logout();
             }
@@ -120,14 +119,12 @@ class Landing extends React.Component {
           })
             .then(res => {
               if (res.status === 204) {
-                // console.log('204: user not authenticated')
-                $('#errorPlaceholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect credentials<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');                
+                console.log('204: user not authenticated')
               } else if (res.status === 400) {
-                // console.log('400: error in authentication. try again');
-                $('#errorPlaceholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Error during authentication. Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');                
+                console.log('400: error in authentication. try again');
               } else {
                 //~~~SUCCESS~~~//
-                // console.log('RESPONSE: ', res);
+                console.log('RESPONSE: ', res);
 
                 const token = res.data.accessToken;
                 this.props.login(token);
@@ -140,7 +137,7 @@ class Landing extends React.Component {
               }
             })
             .catch((e) => {
-              // console.log('error create', e.response);
+              console.log('error creat`e', e.response);
               if (e.response.status === 401) {
                 this.props.logout();
               }
@@ -212,8 +209,6 @@ class Landing extends React.Component {
           <div className="blue-banner">
             <p className="blue-banner-text">{this.state.loginState}</p>
           </div>
-
-          <div id="errorPlaceholder"></div>
 
           <form className="landing-login-form">
             <div className="form-group email-form-group">

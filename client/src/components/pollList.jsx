@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 
 let PollList = function(props) {
-  // console.log('from polllist', props.polls[0]);
+  console.log('from polllist', props.polls[0]);
   return (
     <div>
       <h4>Open polls: {props.polls.length}</h4>
