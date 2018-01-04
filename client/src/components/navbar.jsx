@@ -23,7 +23,7 @@ class Navbar extends React.Component {
         <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between navbar-fixed-top">
   
-            <Link to="/home" className="navbar-brand"><h1>Twopyo</h1></Link>
+            <Link to="/home" className="navbar-brand"><h1>twopyo.</h1></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
