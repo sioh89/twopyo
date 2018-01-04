@@ -78,7 +78,7 @@ class Results extends React.Component {
           </div>
 
         </div>
-        <Share />
+        <Share/>
       </div>
     );
   }

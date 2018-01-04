@@ -122,7 +122,7 @@ class Vote extends React.Component {
           </div>
         </div>
 
-        <Share />
+        <Share/>
       </div>
     );
   }

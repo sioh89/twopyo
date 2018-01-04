@@ -215,17 +215,20 @@ class Landing extends React.Component {
               <label className="input-label" for="inputEmail">Email address</label>
               <input type="email" value={this.state.email} className={`form-control landing-card-login-input${this.state.emailValid ? '' : ' input-error'}`} id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleEmailChange}/>
               <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <small style={{visibility: this.state.emailValid ? 'hidden' : 'visible'}} className="login-error">Please enter a valid email</small>
             </div>
             <div className="form-group password-form-group row">
               <div className="col-md">
                 <label className="input-label" for="inputPassword">Password</label>
                 <input type="password" value={this.state.password} className={`form-control landing-card-login-input${this.state.passwordValid ? '' : ' input-error'}`} id="inputPassword" aria-describedby="passwordHelp" placeholder="Password" onChange={this.handlePasswordChange}/>
                 <small id="passwordHelp" className="form-text text-muted" style={{visibility: this.state.loginState === 'Sign Up' ? 'visible' : 'hidden'}}>Your password must be 6-20 characters</small>
+                <small style={{visibility: this.state.passwordValid ? 'hidden' : 'visible'}}  className="login-error">Password does not meet requirements</small>
               </div>
               <div className="col-md" style={{display: this.state.loginState === 'Sign Up' ? 'block' : 'none'}}>
                 <label for="inputConfirmation">Confirm</label>
                 <input type="password" value={this.state.confirmation} className={`form-control landing-card-login-input${this.state.confirmationValid ? '' : ' input-error'}`} id="inputConfirmation" aria-describedby="confirmationHelp" placeholder="Confirm password" onChange={this.handleConfirmationChange}/>
                 <small id="confirmationHelp" className="form-text text-muted">Please type your password again.</small>
+                <small style={{visibility: this.state.confirmationValid ? 'hidden' : 'visible'}}  className="login-error">Confirmation is not the same as password</small>
               </div>
             </div>
 

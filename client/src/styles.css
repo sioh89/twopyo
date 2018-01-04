@@ -465,3 +465,7 @@ h1 {
 .poll-results-item:hover {
   background-color: #ffffff;
 }
+
+.login-error {
+  color: #d46166;
+}
